@@ -1,1 +1,1 @@
-# exgate-bcp-notifier
+# bcp-notifier
