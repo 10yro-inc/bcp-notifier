@@ -1,7 +1,7 @@
 @extends('common.layout')
-
+<?php $is_production = env('APP_ENV') === 'production' ? true : false; ?>
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+<link rel="stylesheet" href="{{ asset('css/login.css'),$is_production  }}">
     <div class="app-content flexCenter">
         <div>
             <div class="text-center"><!--  <img src="./img/logo.png">--></div>
