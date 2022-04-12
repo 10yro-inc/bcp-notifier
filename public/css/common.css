@@ -1,0 +1,685 @@
+@charset "UTF-8";
+
+
+
+
+/********************************************/
+/*共通CSS                                   */
+/********************************************/
+/*****************************/
+/*共通クラス                 */
+/*****************************/
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6{
+	color:#414141;
+	font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', メイリオ, Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+	/*font-family: 游ゴシック体, YuGothic, 游ゴシック, "Yu Gothic", "ヒラギノ角ゴ ProN W3", Meiryo, メイリオ, -apple-system, sans-serif !important;*/
+}
+
+/*テキストエリアリサイズ禁止*/
+textarea {
+	resize: none;
+}
+
+/*****************************/
+/*レイアウト               */
+/*****************************/
+
+body .app{
+	width: 100vw;		/*ipadの幅*/
+	height:100vh;	
+	background: #f2f2e7;	/*デフォルトの背景を変更*/
+}
+
+
+
+
+.app-content{
+	
+	height:100vh;
+	
+}
+
+/*モーダル*/
+.modal{
+	margin: 0 auto; 		/*横センター*/
+}
+
+/*中央よせ*/
+.flexCenter{
+	display:flex;
+	/*flex-direction:column;*/
+	justify-content:center;
+	align-items: center;
+}
+
+/*下揃え*/
+.flexBottom{
+	display:flex;
+	align-items: flex-end
+}
+
+/*Between*/
+.flexBetween{
+	display:flex;
+	justify-content:space-between;
+}
+.flexAround{
+	display:flex;
+	justify-content: space-around;
+}
+/*共通のマージン*/
+/*下*/
+.mBottom{
+	margin-bottom: 1.125em/*1.75em*/;
+}
+
+/*form-inlineが無いので設定*/
+.formInline{
+	display: inline-block;
+	width: auto;
+	vertical-align: middle;
+}
+
+
+
+/*****************************/
+/*テーブル関連               */
+/*****************************/
+/********/
+/*行固定*/
+/********/
+.stickyTable{
+	overflow: auto;
+	/*仮のサイズ：各ページで上書きする*/
+	height:90%;
+	-webkit-overflow-scrolling: touch;
+}
+/*ヘッダー*/
+.stickyTable table thead th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+}
+
+/* safari iosでヘッダーに隙間ができる不具合対応 */
+_::-webkit-full-page-media, _:future, :root .stickyTable table thead th {
+	top: -2px;
+}
+
+/*ボーダーが動くから疑似要素で書き直す*/
+.stickyTable .table-bordered th{
+	border-bottom:none;
+}
+.stickyTable .table-bordered tbody tr:first-child td{
+	border-top:none;
+}
+.stickyTable .table-bordered th::after {
+	content: "";
+	position: absolute;
+	top: -1px;	/*透ける部分が出るのでマイナスにして調整*/
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-top: 1px solid #B7B7B7;
+	border-bottom: 1px solid #B7B7B7;
+}
+
+/*****************************/
+/*共通               */
+/*****************************/
+/*色 フォント*/
+table.table thead th{
+	background: #CFCFCF;
+	border-color:#B7B7B7;
+	font-weight: bold;
+	font-size:12px;
+}
+table.table tr td{
+	
+	border-color:#B7B7B7;
+}
+table.table.table-bordered{
+	border-color:#B7B7B7;
+}
+/*ボーダー*/
+/*デフォルトだと行のボーダと合わせて太くなる為消す*/
+table.table.table-bordered th{
+	border-bottom:none;
+}
+
+/*デフォルト設定打ち消し*/
+.table {
+	margin-bottom:0;
+	overflow: auto;
+}
+
+/*ヘッダーはセンター余生*/
+.table th{
+	text-align: center;
+	vertical-align: middle !important;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+	padding: 8px 4px 6px;
+}
+tr.row_select td{
+	/*選択された時の背景色*/
+	background:#DBEAFF !important;
+}
+tr.row_select.yellow td{
+	/*黄色の背景色(2年前同じ半期以前のデータ)*/
+	background:#fffecc !important;
+}
+
+/*textareaのdisabled、readonly色修正*/
+textarea.form-control[disabled],
+textarea.form-control[readonly],
+fieldset[disabled] textarea.form-control{
+  background-color: #fdfdfd;
+  color: #000;
+}
+
+/*****************************/
+/*フォーム関連*/
+/*****************************/
+/******************/
+/*フォームの基本cssを上書き*/
+/*****************/
+button, textarea, select {
+	-webkit-appearance:none;
+}
+.form-control{
+	padding:6px 2px 6px 12px;/*右の余白が大きいとタッチ反応領域が狭い*/
+}
+
+.size-large{
+	width: 400px;
+}
+/******************/
+/*プルダウン 　　*/
+/******************/
+select.form-control{
+	position:relative;
+	background: url("../img/icon_pulldown.svg") right 5px top 48% no-repeat;
+	background-size:8px;
+}
+
+/******************/
+/*日付  */
+/******************/
+input[type="date"] {
+	-webkit-appearance: none;
+	appearance: none;
+	position:relative;
+	padding: 6px 12px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+}
+
+input[type="date"]::-webkit-inner-spin-button,    
+input[type="date"]::-webkit-clear-button { display: none; }
+
+.ios-date-input{
+	background: url("../img/icon_pulldown.svg") right 5px top 48% no-repeat;
+	background-size:8px;
+}
+
+/******************/
+/*チェックボックス  */
+/******************/
+/*チェックボックス非表示*/
+.customChkBox input[type="checkbox"] {
+	display: none;
+}
+/*独自チェックボックス*/
+.customChkBox input[type="checkbox"] + label::before {
+	display: inline-block;
+	content: " ";
+	width: 20px;
+	height: 20px;
+	border: 1px solid #B7B7B7;
+	border-radius: 4px;
+	background:#fff;
+	vertical-align: top;
+}
+/*チェック時画像を表示*/
+.customChkBox input[type="checkbox"]:checked + label::before {
+	background: url("../img/icon_check.svg") center center no-repeat #fff;
+	background-size: 14px;
+ }
+ 
+/*disabled*/
+.customChkBox input[type="checkbox"]:disabled + label::before{
+	background:#eee;
+}
+.customChkBox input[type="checkbox"]:checked:disabled + label::before {
+	background: url("../img/icon_check.svg") center center no-repeat #eee;;
+}
+
+
+/*テキストがある時の設定*/
+.customChkBox.hasText{
+	margin-right: 1em;
+}
+.customChkBox.hasText input[type="checkbox"] + label{
+	font-size:16px;
+}
+.customChkBox.hasText input[type="checkbox"] + label::before {
+	margin-right: 0.4em;
+}
+
+/*絞込モーダルの判定対応*/
+#modalRefine.modal.hasJudeg .modal-content {
+    width: 635px;
+}
+#modalRefine.hasJudeg .col-xs-10 span.customChkBox.hasText {
+	display: inline-block;
+	width: 6em;
+}
+#modalRefine.hasJudeg .col-xs-10 span.customChkBox.hasText label{
+	display: inline-block;
+	width:100%;
+}
+
+/*リスト上部のチェックリスト対応*/
+.app-content.ipad .checklist .customChkBox.hasText label{
+	padding-right: 5rem;
+}
+.app-content.ipad .checklist .customChkBox.hasText {
+    margin-right: 0.5rem;
+}
+
+/*****************************/
+/*ボタン関連                 */
+/*****************************/
+/*ボタン*/
+.btn{
+	/*font-weight:bold;*/
+	border-radius: 10px;
+	min-width: 8em; /*最小を8emにして各ページで上書き*/
+	height:36px;/*通常のボタン*/
+	padding: 8px 12px;
+	
+}
+.btn.large{
+	/*大きいボタン*/
+	font-size:16px;
+	height:46px;
+	width:13.75em;
+}
+.btn:focus,
+.btn:not(:disabled):not(.disabled):active:focus{
+	outline: 0 none;	/*まるくしたのでボタンのアウトラインは消す*/
+}
+/*ボタン内のアイコン*/
+.btn>i{
+	line-height: 1.42857143;	/*.btnのline-heightと同じ*/
+	
+}
+/*ボタン先頭のアイコン*/
+.btn:first-child i{
+	padding-right:0.5em;
+}
+.btn-primary {
+    color: #fff;
+ 
+    border-color: #196c10;
+
+  background: -webkit-linear-gradient(top, #196c10 0%, #196c10  100%);
+  background: linear-gradient(to bottom, #196c10 0%, #196c10  100%);
+  box-shadow: 2px 2px 4px #555;
+	
+}
+
+.btn-primary:hover {
+    color: #fff;
+   
+    border-color: #0d6a15;
+	
+	background: -webkit-linear-gradient(top, #0d6a15 0%, #0d6a15  100%);
+	background: linear-gradient(to bottom, #0d6a15 0%, #2c7b0d  100%);
+    opacity: 0.9;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(4, 121, 78, 0.489);
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #0d6a15;
+    border-color: #0d6a15;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #0d6a15;
+    border-color: #0d6a15;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(4, 121, 78, 0.489);
+}
+
+/*BS3に無い為追加*/
+/*グレーボタン(btn-secondaryが無い*/
+.btnSecondary{
+	color: #fff;
+	background-color: #717171;
+	border-color: #717171;
+}
+.btnSecondary:hover,
+.btnSecondary:focus,
+.btnSecondary.active {
+	color: #fff;
+	background-color: #646464;
+	border-color: #646464;
+}
+
+/*btn-outline-primary*/
+.btnOutlinePrimary {
+	color: #007bff;
+	border-color: #007bff;
+	background-color: #fff;
+}
+.btnOutlinePrimary:hover,
+.btnOutlinePrimary:focus,
+.btnOutlinePrimary.active {
+	color: #0062cc;
+	border-color: #0062cc;
+	background-color: #fff;
+}
+/*disabled*/
+.btn.disabled:focus,
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+	background:#a6a6a6;/*DBEAFF*/
+	opacity: 0.48;
+	color:#fff;
+	border-color: #a6a6a6;
+	filter: alpha(opacity=48);
+}
+.btn.disabled:hover,.btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover {
+	opacity: 0.48;
+	filter: alpha(opacity=48);
+	border-color: #828282;/*a6a6a6 a0a0a0 969696 8c8c8c*/
+	background:#828282;
+}
+.btn.btnOutlinePrimary.disabled{
+	/*白＋青い枠線のdisabled*/
+	background:#fff;
+	color:#828282;
+	border-color: #828282;
+}
+.btn.btnOutlinePrimary.disabled:hover{
+	/*白＋青い枠線のdisabled*/
+	border-color: #828282;
+	background:#fff;
+}
+/*****************************/
+/*画像関連                 */
+/*****************************/
+/*横基準アスペクト比4:3*/
+.imgOuter{
+	position: relative;
+	width: 100%;
+}
+.imgOuter:before{
+    content:"";
+    display: block;
+    padding-top: 75%; /* 高さを幅の75%に固定 */
+}
+.imgInner{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+/*オブジェクトフィット*/
+.objectFitContain{
+	object-fit: contain;
+	width: 100%;
+	height: 100%;
+}
+
+/*カメラアイコン*/
+.imgInner .fa-camera {
+	font-size: 5em;
+	color: #ccc;
+	width: 64px;
+	
+}
+
+/*お絵描きサムネイル描画*/
+.imgInner .paintThum{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+/*透過（右クリック保存対応）*/
+img.TransparentImg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	opacity:0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+
+/*****************************/
+/*その他                 */
+/*****************************/
+/*コーポレートカラー*/
+.corpColor{
+	color: #f00;
+}
+
+/*****************************/
+/*ヘッダー                   */
+/*****************************/
+/*ヘッダーの背景と文字を変更*/
+.navbar-app {
+	background: #ffffff;
+	color: #000000;
+	padding:0 16px;
+}
+.navbar .btn{
+	font-size: 16px;
+}
+.navbar .btn a:hover{
+	text-decoration:none;
+}
+
+.navbar .btn-group.pull-left .btn{
+	text-align: left;
+	padding-left:0;
+}
+.navbar .btn-group.pull-right .btn{
+	text-align: right;
+	padding-right:0;
+}
+
+/*ログインユーザー*/
+.navbar #loginUser>div{
+	/*.btnの内容と同じ設定でセンタリング*/
+	line-height: 50px;
+	padding-top: 0;
+	padding-bottom: 0;
+	vertical-align: middle;
+}
+
+/*コンテンツ領域の調整（ヘッダーの高さぶん）*/
+.has-navbar-top .app-body{
+	padding-top: 90px;
+}
+
+/*****************************/
+/*モーダル*/
+/*****************************/
+/*ios position: fixedバグ対応 */
+/*モーダル表示中にキーボード表示でセンターがたまにずれる*/
+.modal,
+.modal-backdrop{
+	position: absolute;
+}
+
+.modal-dialog{
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items: center;
+	height:100%;
+}
+.modal-header{
+	padding:10px 15px 5px;
+}
+.modal-header .modal-title {
+	margin-top:7px;
+	font-size:15px;
+	font-weight:bold;
+    text-align: center;
+}
+.modal-footer {
+	/*デフォルトの上書き*/
+	border-top: none;
+    text-align: center;
+}
+.modal-footer .btn{
+	/*デフォルトの上書き*/
+	border-radius: 50px;
+}
+
+
+/*モーダルの閉じるボタン非表示*/
+.modal-header button.close{
+	display:none;
+}
+
+/*****************************/
+/*モーダル（絞り込み）設定 複数ページにあります*/
+/*****************************/
+#modalRefine.modal .modal-content{
+	width: 525px;/*465では要素が入らない*/
+}
+#modalRefine.modal .modal-body .row{
+	padding:5px 22px;
+}
+#modalRefine.modal .modal-body .form-control{
+	border:1px solid #B7B7B7;
+}
+#modalRefine.modal .row>div{
+	padding: 0px;
+}
+#modalRefine.modal .control-label {
+	/*フォームの見出し*/
+   font-size:12px;
+}
+#modalRefine.modal div.JudgeUpper{
+	/*総合判定のチェックボックス上の段だけ下に余白つける*/
+	margin-bottom:10px;
+}
+#modalRefine.modal .modal-body .form-control.formInline.clm2_1{
+	/*2つ並び*/
+	width:185.7px;
+}
+#modalRefine.modal .modal-body .form-control.formInline.clm2_2{
+	/*2つ並び　mがあるとき*/
+	width:167px;
+}
+#modalRefine.modal .modal-body .form-control.formInline.clm4{
+	/*4つ並び*/
+	width: 105px;
+	/*padding: 6px 2px;*/
+}
+#modalRefine.modal .modal-body .form-control.formInline.clm4_2{
+	/*4つ並び*/
+	width: 75.6px;
+	/* padding: 6px 2px; */
+}
+#modalRefine.modal .modal-body .control-label{
+	line-height: 1.42857143;
+}
+
+
+/*****************************/
+/*上部データ表示領域*/
+/*****************************/
+#upperDataArea{
+	max-height:20%;
+}
+#upperDataArea .form-control{
+	height: 2em;
+	padding:4px 6px;
+}
+#upperDataArea input[type="date"] {
+	padding:4px 6px;
+}
+
+
+/*****************************/
+/*他パーツ*/
+/*****************************/
+.resultStats{
+	/*ボタンと並ぶ検索結果を下揃え*/
+	margin-top:20px;
+	margin-right:30px;
+}
+.wrap_btn .btn{
+	/*ボタンリスト*/
+	margin-right:15px;
+}
+.wrap_btn .btn:last-child{
+	/*ボタンリストの最後のボタンは右余白なし*/
+	margin-right:0;
+}
+
+ul.maru{
+	text-align: left;
+}
+ul.num{
+	margin-left: -40px;
+}
+
+ul.num li{
+	list-style: none;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.app-content #listData{
+    margin: 10px 20px;
+	height:calc(100vh - 50px);
+	background: #fff;
+}
+
+.row-selected {
+    background-color: #dbeaff !important; 
+}
+ 
+
