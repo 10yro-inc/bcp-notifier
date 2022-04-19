@@ -1,5 +1,4 @@
 
-<?php $is_production = env('APP_ENV') === 'production' ? true : false; ?>
 <!DOCTYPE html>
 
 <html lang="ja">
@@ -22,8 +21,8 @@
 	<!-- ***************** -->
 
 	<!-- 共通CSS -->
-	<link rel="stylesheet" href="{{ asset('css/normalize.css',  $is_production ) }}">
-    <link rel="stylesheet" href="{{ asset('css/common.css', $is_production ) }}">
+	<link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 
 
 
