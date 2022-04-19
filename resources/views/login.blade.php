@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <div class="app-content flexCenter">
         <div>
-            <div class="text-center"><!--  <img src="./img/logo.png">--></div>
+            <div class="text-center"></div>
             <h1 class="text-center">BCP通知管理システム</h1></div>
 
             <div id="frmLogin" class="text-center">
