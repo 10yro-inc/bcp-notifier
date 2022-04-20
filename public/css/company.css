@@ -1,0 +1,14 @@
+.app-content #listData {
+	margin-top: 5px;
+	height: calc(100vh - 20px - 186px);
+	background: #fff;
+}
+
+.table-count {
+	padding: 0 16px;
+}
+
+.icon-btn {
+	background-color: transparent;
+	border: 0;
+}

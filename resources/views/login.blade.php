@@ -1,18 +1,32 @@
 @extends('common.layout')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endsection
 @section('content')
-<?php $is_production = env('APP_ENV') === 'production' ? false : false; ?>
-<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    
+        @if (session('err_message'))
+            <span style="visibility:hidden" id="err_message">{{ session('err_message')  }}  </span>
+        @endif
+  
     <div class="app-content flexCenter">
         <div>
-            <div class="text-center"></div>
-            <h1 class="text-center">BCP通知管理システム</h1></div>
+            <h1 class="text-center">BCP通知管理システム</h1>
+        </div>
 
-            <div id="frmLogin" class="text-center">
-                <input id="login_ctrl_user_id" type="text" class="form-control size-large" placeholder="ユーザーID" maxlength="10">
-                <input id="login_ctrl_password" type="password" class="form-control size-large" placeholder="パスワード" jp-input="login.passWord" maxlength="20">
-                <button id="btnLogin" onclick="location.href='./CompanyList.html'"class="btn btn-primary large">ログイン</button>
-            </div>
-        
-        <div>
+        <div id="frmLogin" class="text-center">
+            <form method="post" action="/">
+                @csrf
+                <input id="user_cd" name="user_cd" type="text" class="form-control size-large" placeholder="ユーザーID"
+                    maxlength="10">
+                <input id="password" name="password" type="password" class="form-control size-large" placeholder="パスワード"
+                    jp-input="login.passWord" maxlength="20">
+                <button type="submit" id="btnLogin" onclick="location.href='./CompanyList.html'"
+                    class="btn btn-primary large">ログイン</button>
+            </form>
+        </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script src="{{ asset('js/login.js') }}"></script>
 @endsection

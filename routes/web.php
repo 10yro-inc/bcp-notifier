@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +16,11 @@ use App\Http\Controllers\LoginController;
 
 
 
-Route::get('/', [LoginController::class,'index']);
+Route::get('/', [LoginController::class,'index'])->name('login');;
+Route::post('/', [LoginController::class,'login']);
+
+
+Route::group(['middleware' => 'login'], function () {
+    Route::get('/logout', [LoginController::class,'logout']);
+    Route::get('/company', [CompanyController::class,'index']);
+});

@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('bcp_users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('user_cd')->unique();
-            $table->string('password');
-            $table->boolean('is_super')->default(false);
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('name',200);
+            $table->bigInteger('company_id',false,true);
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('bcp_users');
     }
 };

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ja">
+<html lang="ja" class="overthrow-enabled has-navbar-top">
 <!-- ***************** -->
 <!-- meta              -->
 <!-- ***************** -->
@@ -37,23 +37,52 @@
     <!-- 各ページ読み込み -->
     <div class="app">
 
+        <div class="navbar navbar-app navbar-absolute-top">
+
+            <!-- タイトル -->
+            <div class="navbar-brand navbar-brand-center">
+                <strong class="ng-binding">会社BCP設定一覧</strong>
+            </div>
+
+            <!-- 戻る
+                <div id="headerBackLink" class="btn-group pull-left">
+                    <div class="btn">
+                        <a><img src="./img/arrow_left.svg"> 戻る</a>
+                    </div>
+                </div>
+ -->
+            <!-- ログアウト -->
+            <div class="btn-group pull-right">
+                <div class="btn">
+                    <a href="/logout">ログアウト</a>
+                </div>
+            </div>
+
+            <!-- 部署名 -->
+            <div id="loginUser" class="btn-group pull-right">
+                <div ng-bind="pHeader.userName" class="ng-binding">{{ session('name') }}</div>
+            </div>
+
+        </div>
+
+
         <div class="app-body ng-scope">
             @yield('content')
 
         </div>
     </div>
 
-	
+
     <div id="alertDialog">
         <div id="modalRefine" class="modal hasJudeg ng-scope" ui-if="modalRefine" ui-state="modalRefine">
             <div class="modal-backdrop in"></div>
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 id="alert_title"  class="modal-title">認証エラー</h4>
+                        <h4 id="alert_title" class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
-                        <div id="alert_message" class="message">aaa</div>
+                        <div id="alert_message" class="message"></div>
                         <div class="modal-footer text-center">
                             <button onclick="closeAlertDialog()" class="btn btn-primary">OK</button>
                         </div>
@@ -63,6 +92,7 @@
         </div>
     </div>
     <script src="{{ asset('js/dialog.js') }}"></script>
-	@yield('javascript')
+    @yield('javascript')
 </body>
+
 </html>

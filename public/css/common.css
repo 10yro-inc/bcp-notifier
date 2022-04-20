@@ -683,3 +683,80 @@ ul.num li{
 }
  
 
+/*****************************/
+/*モーダル設定*/
+/*****************************/
+#modalRefine.modal .modal-dialog {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+#modalRefine.modal .modal-content {
+	width: 550px;
+}
+
+#modalRefine.modal .modal-body .row {
+	padding: 5px 10px;
+}
+
+#modalRefine.modal .row>div {
+	padding: 0px;
+}
+
+#modalRefine.modal.hasJudeg .modal-content {
+	width: 600px;
+}
+
+.modal-content .flex-box {
+	display: flex;
+}
+
+.modal-content .padding-none {
+	padding: 0;
+}
+
+.modal-content .railway-length-input {
+	width: 140px;
+	margin-right: 5px;
+}
+
+.modal-content .full-width {
+	width: 100%;
+}
+
+.modal-content .add-detail-btn {
+	width: 100%;
+	text-align: right;
+	font-weight: 700;
+	color: #007aff;
+}
+.modal-content .message {
+	text-align: center;
+}
+
+.modal-content .add-detail-btn label {
+	cursor: pointer;
+}
+
+#alertDialog {
+		visibility: hidden;
+		width: 200px;
+}
+
+#addDialog {
+	visibility: hidden;
+}
+
+#modDialog {
+	visibility: hidden;
+}
+
+input[type="checkbox"] {
+	height: 20px;
+	margin: 0;
+	text-align: left;
+}
+		
