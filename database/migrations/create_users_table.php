@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('user_cd',200)->unique();
             $table->string('password',200);
             $table->boolean('is_super')->default(false);
-            $table->rememberToken();
             $table->timestamps();
         });
     }

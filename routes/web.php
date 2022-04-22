@@ -23,4 +23,7 @@ Route::post('/', [LoginController::class,'login']);
 Route::group(['middleware' => 'login'], function () {
     Route::get('/logout', [LoginController::class,'logout']);
     Route::get('/company', [CompanyController::class,'index']);
+    Route::post('/company/add', [CompanyController::class,'add']);
+    Route::post('/company/update', [CompanyController::class,'update']);
+    Route::post('/company/delete', [CompanyController::class,'delete']);
 });

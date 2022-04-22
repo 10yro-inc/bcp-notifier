@@ -71,8 +71,9 @@
 
         </div>
     </div>
-
-
+    @if (session('err_message'))
+        <span style="visibility:hidden" id="err_message">{{ session('err_message') }} </span>
+    @endif
     <div id="alertDialog">
         <div id="modalRefine" class="modal hasJudeg ng-scope" ui-if="modalRefine" ui-state="modalRefine">
             <div class="modal-backdrop in"></div>
@@ -91,7 +92,10 @@
             </div>
         </div>
     </div>
+    @yield('dialog')
     <script src="{{ asset('js/dialog.js') }}"></script>
+    <script src="{{ asset('js/request.js') }}"></script>
+    <input type=hidden id="csrf_token" value="{{ csrf_token() }}">
     @yield('javascript')
 </body>
 

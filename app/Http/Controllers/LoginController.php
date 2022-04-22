@@ -5,19 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Services\UserService;
 
 class LoginController extends Controller
 {
+    private $userService;
+    public function __construct()
+    {
+        $this->userService = new UserService();
+    }
+
     public function index(Request $request)
     {
-        session()->forget('name');
-        session()->forget('user_cd');
+        $this->removeSession();
         return view('login');
     }
 
     public function login(Request $request)
     {
-        $user = User::where('user_cd', $request->user_cd)->get();
+
+        $user = $this->userService->getUser($request->user_cd);
 
         // 一致
         if (count($user) !== 0 && Hash::check($request->password, $user[0]->password)) {
@@ -25,8 +32,8 @@ class LoginController extends Controller
             // セッション
             session()->put(['name'  => $user[0]->name]);
             session()->put(['user_cd' => $user[0]->user_cd]);
+            session()->put(['user' => $user[0]]);
 
-            // フラッシュ
 
             return redirect(url('/company'));
             // 不一致    
@@ -39,8 +46,14 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        $this->removeSession();
+        return redirect(url('/'));
+    }
+
+    private function removeSession()
+    {
         session()->forget('name');
         session()->forget('user_cd');
-        return redirect(url('/'));
+        session()->forget('user');
     }
 }

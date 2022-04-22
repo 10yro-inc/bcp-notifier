@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('name',200);
-            $table->string('company_cd',200)->unique();
+            $table->string('company_cd',200);
             $table->bigInteger('company_group_id',false,true);
+            $table->string('name',255);
+            $table->timestamps();
+
         });
     }
 

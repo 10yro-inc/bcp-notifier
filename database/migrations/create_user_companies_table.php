@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id',false,true);
             $table->bigInteger('company_id',false,true);
+            $table->timestamps();
         });
     }
 

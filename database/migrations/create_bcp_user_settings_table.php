@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('bcp_user_id',false,true);
             $table->text('setting_json_value');
+            $table->timestamps();
         
         });
     }

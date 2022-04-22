@@ -21,5 +21,13 @@ class UsersTableSeeder extends Seeder
             'user_cd' => '10yro',
             'password' => bcrypt('P@ssw00rd'),
         ]);
+
+        DB::table('users')->insert([
+            'name' => '管理者',
+            'user_cd' => 'admin',
+            'password' => bcrypt('P@ssw00rd'),
+            'is_super' => true,
+        ]);
+    
     }
 }

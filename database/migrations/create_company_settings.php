@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 return new class extends Migration
 {
@@ -13,9 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_groups', function (Blueprint $table) {
+        Schema::create('company_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('name',200);
+            $table->bigInteger('company_id',false,true)->unique();
+            $table->string('api_url',255);
+            $table->string('push_notification',255);
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_groups');
+        Schema::dropIfExists('company_settings');
     }
 };
