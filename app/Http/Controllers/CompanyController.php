@@ -21,11 +21,11 @@ class CompanyController extends Controller
     {
         $user = session()->get('user');
 
-        $list = $this->companyService->getComanies($user->id, $user->is_super);
+        $list = $this->companyService->getComanies($user->company_group_id, $user->is_super);
 
         $companyGroupList = $this->companyService->getComanyGroups();
 
-        return view('company', ['list' => $list, 'companyGroupList' => $companyGroupList]);
+        return view('company', ['list' => $list, 'companyGroupList' => $companyGroupList, 'is_super' => $user->is_super]);
     }
 
 
@@ -53,7 +53,7 @@ class CompanyController extends Controller
         return redirect(url('/company'));
     }
 
-    
+
     public function delete(Request $request)
     {
         $result  = [];

@@ -72,7 +72,7 @@
                                 <label class="control-label">会社グループ</label>
                             </div>
                             <div class="col-xs-10">
-                                <select id="company_group_id" class="form-control">
+                                <select id="company_group_id" class="form-control" {{ $is_super ? '':'disabled' }}>
                                     <option value=""></option>
                                     @foreach ($companyGroupList as $index => $companyGroup)
                                         <option value="{{ $companyGroup->id }}">{{ $companyGroup->name }}</option>

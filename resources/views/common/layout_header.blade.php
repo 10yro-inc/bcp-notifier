@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="{{ asset('css/ui-hover.css') }}">
 <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
 <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+<link rel="stylesheet" href="{{ asset('css/spinner.css') }}">
 @yield('css')
 
 
@@ -33,7 +34,11 @@
 <title>BCP通知管理システム</title>
 
 <body>
-
+    <div class="spinner-backdrop">
+        <div class="spinner-wrapper">
+            <div class="spinner"></div>
+        </div>
+    </div>
     <!-- 各ページ読み込み -->
     <div class="app">
 
@@ -93,6 +98,7 @@
         </div>
     </div>
     @yield('dialog')
+    <script src="{{ asset('js/spinner.js') }}"></script>
     <script src="{{ asset('js/dialog.js') }}"></script>
     <script src="{{ asset('js/request.js') }}"></script>
     <input type=hidden id="csrf_token" value="{{ csrf_token() }}">

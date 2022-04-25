@@ -51,7 +51,7 @@ var addRegistClick = function () {
     var dailog = document.querySelector('#addDialog');
 
     if (dailog) {
-
+        showSpinner()
         var params = {
             company_name: dailog.querySelector('#company_name').value,
             company_cd: dailog.querySelector('#company_cd').value,
@@ -71,7 +71,7 @@ var modRegistClick = function () {
     var dailog = document.querySelector('#modDialog');
 
     if (dailog) {
-
+        showSpinner()
         var params = {
             company_name: dailog.querySelector('#company_name').value,
             company_id: dailog.querySelector('#company_id').value,
@@ -90,6 +90,7 @@ var modRegistClick = function () {
 
 var deleteClick = function () {
     var selectedRow = document.querySelector('.row-selected');
+    showSpinner()
     var params = {
         company_id: selectedRow.dataset.company_id,
         company_settings_id: selectedRow.dataset.company_settings_id,

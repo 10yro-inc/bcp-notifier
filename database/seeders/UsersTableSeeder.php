@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => '10yro',
             'user_cd' => '10yro',
+            'company_group_id' => 0,
             'password' => bcrypt('P@ssw00rd'),
         ]);
 
@@ -26,7 +27,14 @@ class UsersTableSeeder extends Seeder
             'name' => '管理者',
             'user_cd' => 'admin',
             'password' => bcrypt('P@ssw00rd'),
+            'company_group_id' => 1,
             'is_super' => true,
+        ]);
+        DB::table('users')->insert([
+            'name' => '10yro_a',
+            'user_cd' => '10yro_a',
+            'company_group_id' => 2,
+            'password' => bcrypt('P@ssw00rd'),
         ]);
     
     }

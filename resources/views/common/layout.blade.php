@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="{{ asset('css/ui-hover.css') }}">
 <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
 <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+<link rel="stylesheet" href="{{ asset('css/spinner.css') }}">
 @yield('css')
 
 
@@ -33,7 +34,11 @@
 <title>BCP通知管理システム</title>
 
 <body>
-
+    <div class="spinner-backdrop">
+        <div class="spinner-wrapper">
+            <div class="spinner"></div>
+        </div>
+    </div>
     <!-- 各ページ読み込み -->
     <div class="app">
 
@@ -43,14 +48,14 @@
         </div>
     </div>
 
-	
+
     <div id="alertDialog">
         <div id="modalRefine" class="modal hasJudeg ng-scope" ui-if="modalRefine" ui-state="modalRefine">
             <div class="modal-backdrop in"></div>
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 id="alert_title"  class="modal-title">認証エラー</h4>
+                        <h4 id="alert_title" class="modal-title">認証エラー</h4>
                     </div>
                     <div class="modal-body">
                         <div id="alert_message" class="message">aaa</div>
@@ -62,7 +67,9 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/spinner.js') }}"></script>
     <script src="{{ asset('js/dialog.js') }}"></script>
-	@yield('javascript')
+    @yield('javascript')
 </body>
+
 </html>

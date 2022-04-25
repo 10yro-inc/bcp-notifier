@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name',200);
             $table->string('user_cd',200)->unique();
             $table->string('password',200);
+            $table->bigInteger('company_group_id',false,true);
             $table->boolean('is_super')->default(false);
             $table->timestamps();
         });
