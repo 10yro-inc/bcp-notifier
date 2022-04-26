@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\CompanyService;
 use App\Services\BcpUserService;
 use App\Consts\BcpConsts;
+
 use Illuminate\Support\Str;
 
 class BcpUserController extends Controller
@@ -58,7 +59,7 @@ class BcpUserController extends Controller
             $result['user_cd'] = $user_cd;
         } catch (\Exception $e) {
             $result['aes_error'] = true;
-            throw $e;
+        
         }
 
 
@@ -74,8 +75,54 @@ class BcpUserController extends Controller
             session()->flash('message', ' 登録に失敗しました。');
         }
 
-
-
         return redirect(url('/bcp/setting?param=' . $request->prame));
+    }
+
+    public function user_export(Request $request)
+    {
+
+
+        $callback = function () use ($request) {
+            // 出力バッファをopen
+            $stream = fopen('php://output', 'w');
+            // 文字コードをShift-JISに変換
+            stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
+            // データ
+            $users = $this->bcpUserService->getUserExportList($request->company_id);
+            fputcsv($stream, [
+                'ユーザー名',
+                '通知震度',
+                '通知都道府県1',
+                '通知都道府県2',
+                '通知都道府県3',
+                '通知都道府県4',
+                '通知都道府県5',
+            ]);
+            foreach ($users->cursor() as $user) {
+                $json = json_decode($user->BcpUserSetting->setting_json_value);
+              
+                fputcsv($stream, [
+                    $user->user_cd,
+                    array_key_exists($json->earthquake ,BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$json->earthquake] :"",   
+                    array_key_exists($json->pref1 ,BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref1] :"", 
+                    array_key_exists($json->pref2 ,BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref2] :"", 
+                    array_key_exists($json->pref3 ,BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref3] :"", 
+                    array_key_exists($json->pref4 ,BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref4] :"", 
+                    array_key_exists($json->pref5 ,BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref5] :"", 
+                ]);
+            }
+            fclose($stream);
+        };
+
+
+        // 保存するファイル名
+        $filename = sprintf('userlist-%s.csv', date('YmdHis'));
+
+        // ファイルダウンロードさせるために、ヘッダー出力を調整
+        $header = [
+            'Content-Type' => 'application/octet-stream',
+        ];
+
+        return response()->streamDownload($callback, $filename, $header);
     }
 }

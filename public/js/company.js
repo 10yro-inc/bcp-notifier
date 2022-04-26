@@ -100,3 +100,17 @@ var deleteClick = function () {
 
 
 }
+
+
+var exportClick = function () {
+    var selectedRow = document.querySelector('.row-selected');
+   
+    var params = {
+        company_id: selectedRow.dataset.company_id
+    }
+
+    post("/bcp/export", params);
+   
+
+
+}

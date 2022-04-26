@@ -21,18 +21,24 @@ class BcpUserService
   {
     $user = $this->getUser($param->user_cd);
     $company = Company::where('company_cd', '=', $param->company_cd)->first();
-   
-    if (is_null($user) ) {
+
+    if (is_null($user)) {
       $user = BcpUser::create(['user_cd' => $param->user_cd, 'company_id' => $company->id]);
     }
-    
+
     $json_data = ['earthquake' => $param->earthquake];
     for ($i = 1; $i <= 5; $i++) {
       $json_data['pref' . $i] = $param->{'pref' . $i};
     }
 
-    BcpUserSetting::upsert(['bcp_user_id' => $user->id,  'setting_json_value' => json_encode($json_data)], 'bcp_user_id');
+    BcpUserSetting::updateOrCreate(['bcp_user_id' => $user->id],['bcp_user_id' => $user->id,  'setting_json_value' => json_encode($json_data)]);
 
     return $user;
+  }
+
+
+  public function getUserExportList($company_id)
+  {
+    return BcpUser::where('company_id', $company_id);
   }
 }

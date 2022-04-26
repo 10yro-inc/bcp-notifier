@@ -9,5 +9,5 @@ document.querySelector("#bcp_form").addEventListener('submit',
 function(e){
    // e.preventDefault();
     showSpinner();
-    return true;
+  
 });

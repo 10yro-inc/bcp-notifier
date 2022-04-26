@@ -14,7 +14,7 @@
         </div>
 
         <div id="frmLogin" class="text-center">
-            <form method="post" action="/">
+            <form method="post" action="/" id="login_form">
                 @csrf
                 <input id="user_cd" name="user_cd" type="text" class="form-control size-large" placeholder="ユーザーID"
                     maxlength="10">

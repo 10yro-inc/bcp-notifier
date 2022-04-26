@@ -19,7 +19,7 @@ class BcpUserSetting  extends Model
         'setting_json_value',
     ];
 
-    public function BcpUserSetting()
+    public function BcpUser()
     {
         return $this->hasOne(BcpUser::class, 'id', 'bcp_user_id');
     }

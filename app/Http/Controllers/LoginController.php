@@ -26,12 +26,12 @@ class LoginController extends Controller
         $user = $this->userService->getUser($request->user_cd);
 
         // 一致
-        if (count($user) !== 0 && Hash::check($request->password, $user[0]->password)) {
+        if (!is_null($user) && Hash::check($request->password, $user->password)) {
 
             // セッション
-            session()->put(['name'  => $user[0]->name]);
-            session()->put(['user_cd' => $user[0]->user_cd]);
-            session()->put(['user' => $user[0]]);
+            session()->put(['name'  => $user->name]);
+            session()->put(['user_cd' => $user->user_cd]);
+            session()->put(['user' => $user]);
 
 
             return redirect(url('/company'));

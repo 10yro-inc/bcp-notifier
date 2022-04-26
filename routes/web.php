@@ -28,4 +28,6 @@ Route::group(['middleware' => 'login'], function () {
     Route::post('/company/add', [CompanyController::class,'add']);
     Route::post('/company/update', [CompanyController::class,'update']);
     Route::post('/company/delete', [CompanyController::class,'delete']);
+    Route::post('/bcp/export', [BcpUserController::class,'user_export']);
+    
 });
