@@ -53,6 +53,13 @@ class CompanyService
         return CompanyGroup::with("Companies")->get();
     }
 
+        // 会社設定一覧取得
+        public function getCompany($company_cd)
+        {
+            return Company::where('company_cd','=',$company_cd)->get();
+        }
+    
+
     public function createCompany($params)
     {
         try {

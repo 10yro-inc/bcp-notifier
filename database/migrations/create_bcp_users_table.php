@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('bcp_users', function (Blueprint $table) {
             $table->id();
-            $table->string('name',200);
+            $table->string('user_cd',200);
             $table->bigInteger('company_id',false,true);
             $table->timestamps();
         });

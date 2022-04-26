@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\BcpUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,8 @@ use App\Http\Controllers\CompanyController;
 
 Route::get('/', [LoginController::class,'index'])->name('login');;
 Route::post('/', [LoginController::class,'login']);
-
+Route::get('/bcp/setting', [BcpUserController::class,'index']);
+Route::post('/bcp/setting', [BcpUserController::class,'register']);
 
 Route::group(['middleware' => 'login'], function () {
     Route::get('/logout', [LoginController::class,'logout']);

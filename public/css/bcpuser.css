@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+h1 {
+    font-size: 21px;
+    font-weight: bold;
+    margin-top: 24px;
+}
+
+/*中央よせ*/
+.flexCenter {
+    flex-direction: column;
+}
+
+.app-content button.large {
+    margin-top: 65px;
+    width: 44.7%;
+}
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+
+.col-xs-2 {
+    width: 130px;
+    height: 20px;
+    display: inline;
+
+}
+
+.control-label {
+    top: 10px;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.col-xs-10 {
+    width: 200px;
+}
+
+.form-control {
+    width: 200px;
+}
+
+.modal-footer {
+    padding-top: 50px;
+}
+
+.flexCenter {
+    justify-content: flex-start;
+}
+
+select.form-control {
+    background-color: #ffffff;
+}
