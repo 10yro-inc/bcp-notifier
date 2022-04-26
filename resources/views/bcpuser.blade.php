@@ -14,12 +14,12 @@ use App\Consts\BcpConsts;
     @endsection
 @else
     @section('content')
-        @if (session('err_message'))
-            <span style="visibility:hidden" id="err_message">{{ session('err_message') }} </span>
+        @if (session('message'))
+            <span style="visibility:hidden" id="message">{{ session('message') }} </span>
         @endif
 
         <div class="app-content flexCenter">
-            <form method="post" action="/bcp/setting">
+            <form method="post" action="/bcp/setting" id="bcp_form">
                 @csrf
                 <h1 class="flexCenter">通知設定</h1>
                 <div class="row">

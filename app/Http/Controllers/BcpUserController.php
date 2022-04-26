@@ -47,13 +47,10 @@ class BcpUserController extends Controller
 
             $bcpUser =  $this->bcpUserService->getUser($user_cd);
             $bcpUserSetting = $bcpUser->BcpUserSetting;
-      
-            if (!is_null($bcpUser)  && !is_null($bcpUserSetting)  ) {
-                
-                
-                    $settings = json_decode($bcpUserSetting->setting_json_value, true);
-                    $result = array_merge($result, $settings);
-               
+
+            if (!is_null($bcpUser)  && !is_null($bcpUserSetting)) {
+                $settings = json_decode($bcpUserSetting->setting_json_value, true);
+                $result = array_merge($result, $settings);
             }
 
             $result['param'] = $request->param;
@@ -70,12 +67,15 @@ class BcpUserController extends Controller
 
     public function register(Request $request)
     {
+        try {
+            $bcpUser =  $this->bcpUserService->saveUser($request);
+            session()->flash('message', ' 登録しました。');
+        } catch (\Exception $e) {
+            session()->flash('message', ' 登録に失敗しました。');
+        }
 
-        $bcpUser =  $this->bcpUserService->saveUser($request);
 
 
-        return redirect(url('/bcp/setting?param='.$request->prame));
-
-
+        return redirect(url('/bcp/setting?param=' . $request->prame));
     }
 }
