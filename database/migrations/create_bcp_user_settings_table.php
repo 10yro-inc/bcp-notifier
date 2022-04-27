@@ -16,7 +16,12 @@ return new class extends Migration
         Schema::create('bcp_user_settings', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('bcp_user_id',false,true);
-            $table->text('setting_json_value');
+            $table->string('earthquake_cd',2);
+            $table->string('pref1',2)->nullable();
+            $table->string('pref2',2)->nullable();
+            $table->string('pref3',2)->nullable();
+            $table->string('pref4',2)->nullable();
+            $table->string('pref5',2)->nullable();
             $table->timestamps();
         
         });

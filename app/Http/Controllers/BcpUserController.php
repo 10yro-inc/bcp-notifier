@@ -47,18 +47,28 @@ class BcpUserController extends Controller
             }
 
             $bcpUser =  $this->bcpUserService->getUser($user_cd);
-            $bcpUserSetting = $bcpUser->BcpUserSetting;
+            if (!is_null($bcpUser)) {
+                $bcpUserSetting = $bcpUser->BcpUserSetting;
+                if (!is_null($bcpUserSetting)) {
 
-            if (!is_null($bcpUser)  && !is_null($bcpUserSetting)) {
-                $settings = json_decode($bcpUserSetting->setting_json_value, true);
-                $result = array_merge($result, $settings);
+                    $result['earthquake'] = $bcpUserSetting->earthquake_cd;
+                    $result['pref1'] = $bcpUserSetting->pref1;
+                    $result['pref2'] = $bcpUserSetting->pref2;
+                    $result['pref3'] = $bcpUserSetting->pref3;
+                    $result['pref4'] = $bcpUserSetting->pref4;
+                    $result['pref5'] = $bcpUserSetting->pref5;
+                }
             }
+
+
+
 
             $result['param'] = $request->param;
             $result['company_cd'] = $company_cd;
             $result['user_cd'] = $user_cd;
         } catch (\Exception $e) {
             $result['aes_error'] = true;
+            
         }
 
 
@@ -72,6 +82,7 @@ class BcpUserController extends Controller
             session()->flash('message', ' 登録しました。');
         } catch (\Exception $e) {
             session()->flash('message', ' 登録に失敗しました。');
+            throw $e;
         }
 
         return redirect(url('/bcp/setting?param=' . $request->prame));
@@ -98,16 +109,16 @@ class BcpUserController extends Controller
                 '通知都道府県5',
             ]);
             foreach ($users->cursor() as $user) {
-                $json = json_decode($user->BcpUserSetting->setting_json_value);
+                $setting = $user->BcpUserSetting;
 
                 fputcsv($stream, [
                     $user->user_cd,
-                    array_key_exists($json->earthquake, BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$json->earthquake] : "",
-                    array_key_exists($json->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref1] : "",
-                    array_key_exists($json->pref2, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref2] : "",
-                    array_key_exists($json->pref3, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref3] : "",
-                    array_key_exists($json->pref4, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref4] : "",
-                    array_key_exists($json->pref5, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref5] : "",
+                    array_key_exists($setting->earthquake_cd, BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$setting->earthquake_cd] : "",
+                    array_key_exists($setting->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref1] : "",
+                    array_key_exists($setting->pref2, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref2] : "",
+                    array_key_exists($setting->pref3, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref3] : "",
+                    array_key_exists($setting->pref4, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref4] : "",
+                    array_key_exists($setting->pref5, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref5] : "",
                 ]);
             }
             fclose($stream);
@@ -135,21 +146,21 @@ class BcpUserController extends Controller
 
 
         foreach ($users->cursor() as $user) {
-            $json = json_decode($user->BcpUserSetting->setting_json_value);
+            $setting = $user->BcpUserSetting;
 
             $list[] = (object) [
-                'earthquake' => array_key_exists($json->earthquake, BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$json->earthquake] : "",
+                'earthquake' => array_key_exists($setting->earthquake_cd, BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$setting->earthquake_cd] : "",
                 'user_cd' => $user->user_cd,
                 'company_cd' => $company->company_cd,
-                'pref1' =>  array_key_exists($json->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref1] : "",
-                'pref1' =>  array_key_exists($json->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref1] : "",
-                'pref2' =>  array_key_exists($json->pref2, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref2] : "",
-                'pref3' =>  array_key_exists($json->pref3, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref3] : "",
-                'pref4' =>  array_key_exists($json->pref4, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref4] : "",
-                'pref5' => array_key_exists($json->pref5, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref5] : "",
+                'pref1' =>  array_key_exists($setting->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref1] : "",
+                'pref1' =>  array_key_exists($setting->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref1] : "",
+                'pref2' =>  array_key_exists($setting->pref2, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref2] : "",
+                'pref3' =>  array_key_exists($setting->pref3, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref3] : "",
+                'pref4' =>  array_key_exists($setting->pref4, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref4] : "",
+                'pref5' => array_key_exists($setting->pref5, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref5] : "",
             ];
         }
 
-        return view('bcpuserlist', ['list' => $list,'company_id' => $request->company_id]);
+        return view('bcpuserlist', ['list' => $list, 'company_id' => $request->company_id]);
     }
 }

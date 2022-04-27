@@ -16,7 +16,12 @@ class BcpUserSetting  extends Model
      */
     protected $fillable = [
         'bcp_user_id',
-        'setting_json_value',
+        'earthquake_cd',
+        'pref1',
+        'pref2',
+        'pref3',
+        'pref4',
+        'pref5',
     ];
 
     public function BcpUser()

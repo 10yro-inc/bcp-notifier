@@ -15,7 +15,7 @@ use App\Consts\BcpConsts;
 @else
     @section('content')
         @if (session('message'))
-            <span style="visibility:hidden" id="message">{{ session('message') }} </span>
+            <span style="display:none" id="message">{{ session('message') }} </span>
         @endif
 
         <div class="app-content flexCenter">

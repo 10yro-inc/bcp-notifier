@@ -5,7 +5,7 @@
 @section('content')
     
         @if (session('err_message'))
-            <span style="visibility:hidden" id="err_message">{{ session('err_message')  }}  </span>
+            <span style="display:none" id="err_message">{{ session('err_message')  }}  </span>
         @endif
   
     <div class="app-content flexCenter">

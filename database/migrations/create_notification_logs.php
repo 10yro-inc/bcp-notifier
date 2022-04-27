@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('api_id',1024);
             $table->tinyInteger('api_type');
+            $table->text('areas');
             $table->text('message');
             $table->dateTime('notification_datetime');
         });
