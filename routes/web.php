@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\BcpUserController;
+use App\Http\Controllers\PushNotificationRegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,7 @@ Route::get('/', [LoginController::class,'index'])->name('login');;
 Route::post('/', [LoginController::class,'login']);
 Route::get('/bcp/setting', [BcpUserController::class,'index']);
 Route::post('/bcp/setting', [BcpUserController::class,'register']);
+Route::get('/notification/register', [PushNotificationRegisterController::class,'index']);
 
 Route::group(['middleware' => 'login'], function () {
     Route::get('/logout', [LoginController::class,'logout']);
@@ -29,5 +31,5 @@ Route::group(['middleware' => 'login'], function () {
     Route::post('/company/update', [CompanyController::class,'update']);
     Route::post('/company/delete', [CompanyController::class,'delete']);
     Route::post('/bcp/export', [BcpUserController::class,'user_export']);
-    
+    Route::get('/bcp/user', [BcpUserController::class,'user_list']);
 });

@@ -101,15 +101,14 @@ var deleteClick = function () {
 
 }
 
-
-var exportClick = function () {
+var userListClick = function () {
     var selectedRow = document.querySelector('.row-selected');
-   
+    showSpinner()
     var params = {
         company_id: selectedRow.dataset.company_id
     }
 
-    post("/bcp/export", params);
+    get("/bcp/user", params);
    
 
 

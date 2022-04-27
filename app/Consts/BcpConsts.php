@@ -66,4 +66,9 @@ class BcpConsts
       '2' => '震度4以上',
       '3' => '震度3以上',
    ];
+
+
+   public const API_TYPE_EARTHQUAKE = 1;
+   public const API_TYPE_DISASTER = 2;
+   public const EARTHQUAKE_TITLE = '震源・震度に関する情報';
 }

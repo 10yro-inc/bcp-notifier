@@ -42,7 +42,7 @@ class CompanyService
             ->orderBy('company_name');
         //dd($query->toSql(), $query->getBindings());
         // $companies = $query->get();
-
+        
         return $query->get();
     }
 
@@ -53,12 +53,17 @@ class CompanyService
         return CompanyGroup::with("Companies")->get();
     }
 
-        // 会社設定一覧取得
-        public function getCompany($company_cd)
-        {
-            return Company::where('company_cd','=',$company_cd)->get();
-        }
-    
+
+    public function getCompany($company_cd)
+    {
+        return Company::where('company_cd', '=', $company_cd)->get();
+    }
+
+    public function getCompanyById($company_id)
+    {
+        return Company::find($company_id);
+    }
+
 
     public function createCompany($params)
     {
@@ -81,7 +86,7 @@ class CompanyService
             return true;
         } catch (\Throwable $e) {
             DB::rollBack();
-             return false;
+            return false;
         }
     }
 
@@ -146,7 +151,7 @@ class CompanyService
             return true;
         } catch (\Throwable $e) {
             DB::rollBack();
-            
+
             return false;
         }
     }

@@ -51,7 +51,7 @@
                 <button type="button" onclick="openAddDialog()" class="btn btn-primary large">新規作成</button>
                 <button type="button" onclick="openModDialog()" class="btn btn-primary large">変更</button>
                 <button type="button" onclick="deleteClick()" class="btn btn-primary large">削除</button>
-                <button type="button" onclick="exportClick()" class="btn btn-primary large">ユーザー一覧出力</button>
+                <button type="button" onclick="userListClick()" class="btn btn-primary large">ユーザー一覧</button>
             </div>
         </div>
 

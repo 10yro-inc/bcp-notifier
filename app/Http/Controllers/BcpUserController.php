@@ -59,7 +59,6 @@ class BcpUserController extends Controller
             $result['user_cd'] = $user_cd;
         } catch (\Exception $e) {
             $result['aes_error'] = true;
-        
         }
 
 
@@ -100,15 +99,15 @@ class BcpUserController extends Controller
             ]);
             foreach ($users->cursor() as $user) {
                 $json = json_decode($user->BcpUserSetting->setting_json_value);
-              
+
                 fputcsv($stream, [
                     $user->user_cd,
-                    array_key_exists($json->earthquake ,BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$json->earthquake] :"",   
-                    array_key_exists($json->pref1 ,BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref1] :"", 
-                    array_key_exists($json->pref2 ,BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref2] :"", 
-                    array_key_exists($json->pref3 ,BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref3] :"", 
-                    array_key_exists($json->pref4 ,BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref4] :"", 
-                    array_key_exists($json->pref5 ,BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref5] :"", 
+                    array_key_exists($json->earthquake, BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$json->earthquake] : "",
+                    array_key_exists($json->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref1] : "",
+                    array_key_exists($json->pref2, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref2] : "",
+                    array_key_exists($json->pref3, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref3] : "",
+                    array_key_exists($json->pref4, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref4] : "",
+                    array_key_exists($json->pref5, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref5] : "",
                 ]);
             }
             fclose($stream);
@@ -124,5 +123,33 @@ class BcpUserController extends Controller
         ];
 
         return response()->streamDownload($callback, $filename, $header);
+    }
+
+
+    public function user_list(Request $request)
+    {
+
+        $list = [];
+        $users = $this->bcpUserService->getUserExportList($request->company_id);
+        $company = $this->companyService->getCompanyById($request->company_id);
+
+
+        foreach ($users->cursor() as $user) {
+            $json = json_decode($user->BcpUserSetting->setting_json_value);
+
+            $list[] = (object) [
+                'earthquake' => array_key_exists($json->earthquake, BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$json->earthquake] : "",
+                'user_cd' => $user->user_cd,
+                'company_cd' => $company->company_cd,
+                'pref1' =>  array_key_exists($json->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref1] : "",
+                'pref1' =>  array_key_exists($json->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref1] : "",
+                'pref2' =>  array_key_exists($json->pref2, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref2] : "",
+                'pref3' =>  array_key_exists($json->pref3, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref3] : "",
+                'pref4' =>  array_key_exists($json->pref4, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref4] : "",
+                'pref5' => array_key_exists($json->pref5, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$json->pref5] : "",
+            ];
+        }
+
+        return view('bcpuserlist', ['list' => $list,'company_id' => $request->company_id]);
     }
 }
