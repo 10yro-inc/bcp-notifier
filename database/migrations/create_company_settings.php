@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('company_id',false,true)->unique();
             $table->string('api_url',255);
             $table->string('push_notification',255);
+            $table->string('cooperation_password',255);
             $table->timestamps();
         });
     }

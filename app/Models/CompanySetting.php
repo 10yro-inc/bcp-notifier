@@ -13,5 +13,6 @@ class CompanySetting extends Model
         'company_id',
         'api_url',
         'push_notification',
+        'cooperation_password',
     ];
 }

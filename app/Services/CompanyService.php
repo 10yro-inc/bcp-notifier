@@ -35,6 +35,7 @@ class CompanyService
             'company_groups.name as company_group_name',
             'companies.name as company_name',
             'company_settings.api_url',
+            'company_settings.cooperation_password',
             'company_settings.push_notification',
             'company_cd',
         ])
@@ -79,6 +80,7 @@ class CompanyService
             CompanySetting::create([
                 'company_id'     =>  $company->id,
                 'api_url'    => $params->api_url,
+                'cooperation_password' => $params->cooperation_password,
                 'push_notification' => $params->push_notification,
             ]);
 
@@ -112,10 +114,12 @@ class CompanyService
                 CompanySetting::create([
                     'company_id'     =>  $company->id,
                     'api_url'    => $params->api_url,
+                    'cooperation_password' => $params->cooperation_password,
                     'push_notification' => $params->push_notification,
                 ]);
             } else {
                 $companySetting->api_url = $params->api_url;
+                $companySetting->cooperation_password = $params->cooperation_password;
                 $companySetting->push_notification = $params->push_notification;
                 $companySetting->save();
             }

@@ -32,7 +32,8 @@
                     @foreach ($list as $index => $company)
                         <tr class="" data-company_group_id="{{ $company->company_group_id }}"
                             data-company_id="{{ $company->company_id }}"
-                            data-company_settings_id="{{ $company->company_settings_id }}">
+                            data-company_settings_id="{{ $company->company_settings_id }}"
+                            data-cooperation_password="{{ $company->cooperation_password }}">
                             <td class="text-right">{{ $index + 1 }}</td>
                             <td id="group_name">{{ $company->company_group_name }}</td>
                             <td id="company_name">{{ $company->company_name }}</td>
@@ -73,7 +74,7 @@
                                 <label class="control-label">会社グループ</label>
                             </div>
                             <div class="col-xs-10">
-                                <select id="company_group_id" class="form-control" {{ $is_super ? '':'disabled' }}>
+                                <select id="company_group_id" class="form-control" {{ $is_super ? '' : 'disabled' }}>
                                     <option value=""></option>
                                     @foreach ($companyGroupList as $index => $companyGroup)
                                         <option value="{{ $companyGroup->id }}">{{ $companyGroup->name }}</option>
@@ -104,6 +105,14 @@
                             </div>
                             <div class="col-xs-10">
                                 <input type="text" id="api_url" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <label class="control-label">連携パスワード</label>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="password" id="cooperation_password" class="form-control">
                             </div>
                         </div>
                         <div class="row">
@@ -166,6 +175,14 @@
                             </div>
                             <div class="col-xs-10">
                                 <input type="text" id="api_url" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <label class="control-label">連携パスワード</label>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="password" id="cooperation_password" class="form-control">
                             </div>
                         </div>
                         <div class="row">

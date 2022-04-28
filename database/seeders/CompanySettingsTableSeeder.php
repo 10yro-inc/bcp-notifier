@@ -18,26 +18,31 @@ class CompanySettingsTableSeeder extends Seeder
         DB::table('company_settings')->insert([
             'company_id' => 1,
             'api_url' => 'https://example.com/api2',
+            'cooperation_password' => 'pass',
             'push_notification' => 'PUSH通知のお知らせ002',
         ]);
         DB::table('company_settings')->insert([
             'company_id' => 2,
             'api_url' => 'https://example.com/api3',
+            'cooperation_password' => 'pass',
             'push_notification' => 'PUSH通知のお知らせ003',
         ]);
         DB::table('company_settings')->insert([
             'company_id' => 3,
             'api_url' => 'https://example.com/api4',
+            'cooperation_password' => 'pass',
             'push_notification' => 'PUSH通知のお知らせ004',
         ]);
         DB::table('company_settings')->insert([
             'company_id' => 4,
             'api_url' => 'https://example.com/api5',
+            'cooperation_password' => 'pass',
             'push_notification' => 'PUSH通知のお知らせ005',
         ]);
         DB::table('company_settings')->insert([
             'company_id' => 5,
             'api_url' => 'https://example.com/api5',
+            'cooperation_password' => 'pass',
             'push_notification' => 'PUSH通知のお知らせ005',
         ]);
     }
