@@ -60,15 +60,24 @@ class BcpConsts
    ];
 
 
+   public const EARTHQUAKE_INT5 = '1';
+   public const EARTHQUAKE_INT4 = '2';
+   public const EARTHQUAKE_INT3 = '3';
 
    public const EarthquakeList = [
-      '1' => '震度5以上',
-      '2' => '震度4以上',
-      '3' => '震度3以上',
+      BcpConsts::EARTHQUAKE_INT5 => '震度5以上',
+      BcpConsts::EARTHQUAKE_INT4 => '震度4以上',
+      BcpConsts::EARTHQUAKE_INT3 => '震度3以上',
    ];
 
 
    public const API_TYPE_EARTHQUAKE = 1;
    public const API_TYPE_DISASTER = 2;
-   public const EARTHQUAKE_TITLE = '震源・震度に関する情報';
+   public const EARTHQUAKE_XML_CODE = 'VXSE51';
+
+   //public const EARTHQUAKE_API_URL= 'https://www.data.jma.go.jp/developer/xml/feed/eqvol.xml';
+
+   public const EARTHQUAKE_API_URL = 'https://www.data.jma.go.jp/developer/xml/feed/eqvol_l.xml';
+
+   public const NOTIFICATION_API_URL = 'http://192.168.0.100//notifier/apis/notification';
 }

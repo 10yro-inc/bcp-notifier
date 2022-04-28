@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Jobs\PushNotification;
+use App\Services\EarthquakeReadXmlService;
 class PushNotificationRegisterController extends Controller
 {
     //
 
     public function index(){
 
-        PushNotification::dispatch('https://www.data.jma.go.jp/developer/xml/feed/eqvol.xml');
+        PushNotification::dispatch(new EarthquakeReadXmlService());
     }
 }

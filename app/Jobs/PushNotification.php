@@ -9,22 +9,26 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
-use App\Models\NotificationLogs;
+use App\Models\NotificationLog;
 use App\Consts\BcpConsts;
+use App\Services\BcpUserService;
+use App\Library\Interface\ReadXmlInterface;
 
 class PushNotification implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $url;
+    private $xmlInterface;
+    private $bcpUserService;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $url)
+    public function __construct(ReadXmlInterface $xmlInterface)
     {
-        $this->url = $url;
+        $this->xmlInterface = $xmlInterface;
+        $this->bcpUserService = new BcpUserService();
     }
 
     /**
@@ -34,31 +38,31 @@ class PushNotification implements ShouldQueue
      */
     public function handle()
     {
-        $this->ReadXml();
+        $notificationLogs = $this->xmlInterface->ReadXml();
+        foreach ($notificationLogs as $index => $notificationLog) {
+            $this->push($notificationLog);
+        }
     }
 
-    private function ReadXml()
+    private function push(NotificationLog $notificationLog)
     {
-        $response = Http::get($this->url);
-        $xml_obj = simplexml_load_string($response->body());
-        $entries = [];
-        foreach ($xml_obj->entry as $entry) {
-            if ($entry->title == BcpConsts::EARTHQUAKE_TITLE) {
-                array_push($entries, $entry);
-
-                NotificationLogs::firstOrCreate(
-                    ['api_id' => $entry->id],
-                    [
-                        'api_type' => BcpConsts::API_TYPE_EARTHQUAKE,
-                        'message' => $entry->content,
-                        'notification_datetime' => (new \DateTime($entry->updated))
-                    ]
-                );
+        $areas = json_decode($notificationLog->areas);
+        $conpany_users = $this->bcpUserService->getPushUser($areas);
+ 
+        foreach ($conpany_users as $company_cd => $settings) {
+            $data['tenantCode'] =  $settings[0]->company_cd;
+            $data['cooperationPassword'] = $settings[0]->cooperation_password;
+            $data["message"] =  $settings[0]->push_notification;
+            foreach ($settings  as $setting) {
+                $data["notifications"][] = ['loginName' => $setting->user_cd];
             }
+            $response = Http::post($settings[0]->api_url,  $data);
+  
         }
-
-
-       // dd($entries);
-        //  log(print_r($xml_obj->entry,true));
+        // $data['tenantCode'] =  $company_cd;
+        // $data['cooperationPassword'] = 'P@ssw0rd';
+        // $data["message"] = "お知らせです。";
+        // $data["notifications"][] = ['loginName' => "toyozumi"];
+  
     }
 }
