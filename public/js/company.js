@@ -28,7 +28,8 @@ var openModDialog = function () {
         dailog.querySelector('#group_name').value = selectedRow.querySelector('#group_name').innerHTML;
         dailog.querySelector('#company_name').value = selectedRow.querySelector('#company_name').innerHTML;
         dailog.querySelector('#api_url').value = selectedRow.querySelector('#api_url').innerHTML;
-        dailog.querySelector('#push_notification').value = selectedRow.querySelector('#push_notification').innerHTML;
+        dailog.querySelector('#cooperation_password').value = selectedRow.dataset.cooperation_password;
+        dailog.querySelector('#push_notification').value =  selectedRow.querySelector('#push_notification').innerHTML;
         dailog.querySelector('#company_cd').value = selectedRow.querySelector('#company_cd').innerHTML;
         dailog.querySelector('#company_settings_id').value = selectedRow.dataset.company_settings_id;
         dailog.querySelector('#company_group_id').value = selectedRow.dataset.company_group_id;
@@ -57,6 +58,7 @@ var addRegistClick = function () {
             company_cd: dailog.querySelector('#company_cd').value,
             company_group_id: dailog.querySelector('#company_group_id').value,
             api_url: dailog.querySelector('#api_url').value,
+            cooperation_password: dailog.querySelector('#cooperation_password').value,
             push_notification: dailog.querySelector('#push_notification').value,
         }
 
@@ -78,6 +80,7 @@ var modRegistClick = function () {
             company_cd: dailog.querySelector('#company_cd').value,
             company_group_id: dailog.querySelector('#company_group_id').value,
             api_url: dailog.querySelector('#api_url').value,
+            cooperation_password: dailog.querySelector('#cooperation_password').value,
             push_notification: dailog.querySelector('#push_notification').value,
             company_settings_id: dailog.querySelector('#company_settings_id').value,
         }
