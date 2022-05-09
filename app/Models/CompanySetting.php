@@ -14,5 +14,6 @@ class CompanySetting extends Model
         'api_url',
         'push_notification',
         'cooperation_password',
+        'info_page_url',
     ];
 }

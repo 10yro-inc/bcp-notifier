@@ -24,6 +24,7 @@
                         <th>会社コード</th>
                         <th>PUSH通知API</th>
                         <th>PUSH通知文章</th>
+                        <th>お知らせページ</th>
                     </tr>
                 </thead>
 
@@ -40,6 +41,7 @@
                             <td id="company_cd">{{ $company->company_cd }}</td>
                             <td id="api_url">{{ $company->api_url }}</td>
                             <td id="push_notification">{{ $company->push_notification }}</td>
+                            <td id="info_page_url">{{ $company->info_page_url }}</td>
 
                         </tr>
                     @endforeach
@@ -123,6 +125,14 @@
                                 <input type="text" id="push_notification" class="form-control">
                             </div>
                         </div>
+                         <div class="row">
+                            <div class="col-xs-2">
+                                <label class="control-label">お知らせページURL</label>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="text" id="info_page_url" class="form-control">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="modal-footer text-center">
@@ -191,6 +201,14 @@
                             </div>
                             <div class="col-xs-10">
                                 <input type="text" id="push_notification" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <label class="control-label">お知らせページURL</label>
+                            </div>
+                            <div class="col-xs-10">
+                                <input type="text" id="info_page_url" class="form-control">
                             </div>
                         </div>
                         <input type="hidden" id="company_id" value="">

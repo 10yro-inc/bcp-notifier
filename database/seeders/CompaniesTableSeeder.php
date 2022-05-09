@@ -41,5 +41,10 @@ class CompaniesTableSeeder extends Seeder
             'name' => 'A001支店',
             'company_group_id' => 2,
         ]);
+        DB::table('companies')->insert([
+            'company_cd' => '10yro',
+            'name' => '10yro',
+            'company_group_id' => 1,
+        ]);
     }
 }

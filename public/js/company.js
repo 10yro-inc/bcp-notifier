@@ -34,6 +34,7 @@ var openModDialog = function () {
         dailog.querySelector('#company_settings_id').value = selectedRow.dataset.company_settings_id;
         dailog.querySelector('#company_group_id').value = selectedRow.dataset.company_group_id;
         dailog.querySelector('#company_id').value = selectedRow.dataset.company_id;
+        dailog.querySelector('#info_page_url').value = selectedRow.querySelector('#info_page_url').innerHTML;
 
         dailog.style.visibility = "visible";
 
@@ -60,6 +61,7 @@ var addRegistClick = function () {
             api_url: dailog.querySelector('#api_url').value,
             cooperation_password: dailog.querySelector('#cooperation_password').value,
             push_notification: dailog.querySelector('#push_notification').value,
+            info_page_url: dailog.querySelector('#info_page_url').value,
         }
 
 
@@ -83,6 +85,7 @@ var modRegistClick = function () {
             cooperation_password: dailog.querySelector('#cooperation_password').value,
             push_notification: dailog.querySelector('#push_notification').value,
             company_settings_id: dailog.querySelector('#company_settings_id').value,
+            info_page_url: dailog.querySelector('#info_page_url').value,
         }
 
 

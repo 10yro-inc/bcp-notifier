@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('api_url',255);
             $table->string('push_notification',255);
             $table->string('cooperation_password',255);
+            $table->string('info_page_url',255);
             $table->timestamps();
         });
     }

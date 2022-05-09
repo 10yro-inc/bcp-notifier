@@ -38,6 +38,7 @@ class CompanyService
             'company_settings.cooperation_password',
             'company_settings.push_notification',
             'company_cd',
+            'company_settings.info_page_url',
         ])
             ->orderBy('company_group_name')
             ->orderBy('company_name');
@@ -82,6 +83,7 @@ class CompanyService
                 'api_url'    => $params->api_url,
                 'cooperation_password' => $params->cooperation_password,
                 'push_notification' => $params->push_notification,
+                'info_page_url' => $params->info_page_url,
             ]);
 
             DB::commit();
@@ -116,11 +118,13 @@ class CompanyService
                     'api_url'    => $params->api_url,
                     'cooperation_password' => $params->cooperation_password,
                     'push_notification' => $params->push_notification,
+                    'info_page_url' => $params->info_page_url,
                 ]);
             } else {
                 $companySetting->api_url = $params->api_url;
                 $companySetting->cooperation_password = $params->cooperation_password;
                 $companySetting->push_notification = $params->push_notification;
+                $companySetting->info_page_url = $params->info_page_url;
                 $companySetting->save();
             }
 
