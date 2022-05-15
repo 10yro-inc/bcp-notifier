@@ -26,11 +26,12 @@ class BcpUserController extends Controller
         $result = ['aes_error' => false];
         try {
             // 複合する
-            $param = openssl_decrypt($request->param, 'AES-256-ECB', BcpConsts::CryptKey, 0);
-            if ($param  === false) {
-                $result['aes_error'] = true;
-            }
-
+            //$param = base64_decode($request->param);
+            //if ($param  === false) {
+            //    $result['aes_error'] = true;
+            //}
+            
+            $param = $request->param;
             $segments = Str::of($param)->split('/,/');
 
             if ($segments->count() !== 2) {
