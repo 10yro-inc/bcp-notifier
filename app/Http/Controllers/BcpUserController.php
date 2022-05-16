@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Services\CompanyService;
 use App\Services\BcpUserService;
 use App\Consts\BcpConsts;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+
 
 class BcpUserController extends Controller
 {
@@ -30,7 +31,7 @@ class BcpUserController extends Controller
             //if ($param  === false) {
             //    $result['aes_error'] = true;
             //}
-            
+
             $param = $request->param;
             $segments = Str::of($param)->split('/,/');
 
@@ -69,7 +70,6 @@ class BcpUserController extends Controller
             $result['user_cd'] = $user_cd;
         } catch (\Exception $e) {
             $result['aes_error'] = true;
-            
         }
 
 
@@ -86,6 +86,26 @@ class BcpUserController extends Controller
             throw $e;
         }
 
+        return redirect(url('/bcp/setting?param=' . $request->prame));
+    }
+
+    public function test_notify(Request $request)
+    {
+    
+        $companies = $this->companyService->getCompany($request->company_cd);
+
+        if (count($companies) !== 1) {
+            $result['aes_error'] = true;
+        }
+        $company = $companies[0];
+
+        $data['tenantCode'] =  $company->company_cd;
+        $data['cooperationPassword'] = $company->CompanySetting->cooperation_password;
+        $data["message"] =  $company->CompanySetting->push_notification;
+        $data["notifications"][] = ['loginName' => $request->user_cd];
+      //  $data['data'][] = ['url' =>  $company->CompanySetting->info_page_url];
+       $response = Http::post($company->CompanySetting->api_url,  $data);
+dd($data,$response->json());
         return redirect(url('/bcp/setting?param=' . $request->prame));
     }
 

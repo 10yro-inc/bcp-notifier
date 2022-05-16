@@ -15,7 +15,8 @@ var post = function (path, params, method = 'post') {
 
             form.appendChild(hiddenField);
         }
-        var crsf_token = document.querySelector("#csrf_token");
+        var crsf_token = document.querySelector("#csrf_token , input[name='_token']");
+
         if (crsf_token) {
             const tokenField = document.createElement('input');
             tokenField.type = 'hidden';

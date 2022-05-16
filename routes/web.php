@@ -22,6 +22,7 @@ Route::get('/', [LoginController::class,'index'])->name('login');;
 Route::post('/', [LoginController::class,'login']);
 Route::get('/bcp/setting', [BcpUserController::class,'index']);
 Route::post('/bcp/setting', [BcpUserController::class,'register']);
+Route::post('/bcp/test/notify', [BcpUserController::class,'test_notify']);
 Route::get('/notification/register', [PushNotificationRegisterController::class,'index']);
 
 Route::group(['middleware' => 'login'], function () {

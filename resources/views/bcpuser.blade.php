@@ -84,10 +84,17 @@ use App\Consts\BcpConsts;
                 <div id="frmLogin" class="text-center">
                     <button type="submit" class="btn btn-primary large">登録</button>
                 </div>
+                <div id="btn_test_notifiy" class="text-center">
+                    <button type="button" class="btn btn-primary large" onclick="testNotifyClick()">テスト通知</button>
+                </div>
             </form>
+            
+
         </div>
     @endsection
 @endif
 @section('javascript')
+    <script src="{{ asset('js/request.js') }}"></script>
     <script src="{{ asset('js/bcpuser.js') }}"></script>
+    
 @endsection
