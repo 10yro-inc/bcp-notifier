@@ -75,9 +75,11 @@ class BcpConsts
    public const API_TYPE_DISASTER = 2;
    public const EARTHQUAKE_XML_CODE = 'VXSE51';
 
-   //public const EARTHQUAKE_API_URL= 'https://www.data.jma.go.jp/developer/xml/feed/eqvol.xml';
+   // 短期スパン
+   public const EARTHQUAKE_API_URL= 'https://www.data.jma.go.jp/developer/xml/feed/eqvol.xml';
 
-   public const EARTHQUAKE_API_URL = 'https://www.data.jma.go.jp/developer/xml/feed/eqvol_l.xml';
+   // 長期スパン
+   //public const EARTHQUAKE_API_URL = 'https://www.data.jma.go.jp/developer/xml/feed/eqvol_l.xml';
 
    public const NOTIFICATION_API_URL = 'http://192.168.0.100//notifier/apis/notification';
 }
