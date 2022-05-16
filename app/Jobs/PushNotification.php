@@ -56,14 +56,12 @@ class PushNotification implements ShouldQueue
             foreach ($settings  as $setting) {
                 $data["notifications"][] = ['loginName' => $setting->user_cd];
             }
-            $data['data'][] = ['url' =>  $setting->info_page_url];
+           // 通知先URL、APIが未対応の為、コメントアウト
+           // $data['data'][] = ['url' =>  $settings[0]->info_page_url];
             $response = Http::post($settings[0]->api_url,  $data);
   
         }
-        // $data['tenantCode'] =  $company_cd;
-        // $data['cooperationPassword'] = 'P@ssw0rd';
-        // $data["message"] = "お知らせです。";
-        // $data["notifications"][] = ['loginName' => "toyozumi"];
+
   
     }
 }
