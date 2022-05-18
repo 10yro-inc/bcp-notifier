@@ -67,7 +67,7 @@ use App\Consts\BcpConsts;
                         </div>
                         <div class="col-xs-10">
                             <select class="form-control" name="pref{{ $i }}">
-                                <option value=""></option>
+                                <option value="">設定なし</option>
                                 @foreach (BcpConsts::PrefecturesList as $no => $pref)
                                     @if (isset(${'pref' . $i}) && ${'pref' . $i} == $no)
                                         <option value="{{ $no }}" selected>{{ $pref }}</option>
