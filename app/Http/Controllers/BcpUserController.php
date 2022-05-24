@@ -103,7 +103,7 @@ class BcpUserController extends Controller
         $data['cooperationPassword'] = $company->CompanySetting->cooperation_password;
         $data["message"] =  '【テスト通知】'.$company->CompanySetting->push_notification;
         $data["notifications"][] = ['loginName' => $request->user_cd];
-        //  $data['data'][] = ['url' =>  $company->CompanySetting->info_page_url];
+        $data['data'][] = ['url' =>  $company->CompanySetting->info_page_url];
         $response = Http::post($company->CompanySetting->api_url,  $data);
         session()->flash('message', ' テスト通知しました。');
         return redirect(url('/bcp/setting?param=' . $request->prame));
