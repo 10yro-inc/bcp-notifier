@@ -20,10 +20,10 @@ class InfoPageAccessService
         try {
             DB::beginTransaction();
 
-            $company = InfoPageAccess::create([
+            $infoPageAccess = InfoPageAccess::create([
                 'user_cd'   => $params->user_cd,
-                'company_cd'    =>  $params->company_cd,
-                'notification_log_id'   =>  $params->notification_log_id,
+                'company_cd'    => $params->company_cd,
+                'notification_log_id'   => $params->notification_log_id,
             ]);
 
             DB::commit();
