@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\BcpUserController;
 use App\Http\Controllers\PushNotificationRegisterController;
+use App\Http\Controllers\InfoPageController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,7 @@ Route::get('/bcp/setting', [BcpUserController::class,'index']);
 Route::post('/bcp/setting', [BcpUserController::class,'register']);
 Route::post('/bcp/test/notify', [BcpUserController::class,'test_notify']);
 Route::get('/notification/register', [PushNotificationRegisterController::class,'index']);
+Route::get('/bcp/info', [InfoPageController::class,'index']);
 
 Route::group(['middleware' => 'login'], function () {
     Route::get('/logout', [LoginController::class,'logout']);
