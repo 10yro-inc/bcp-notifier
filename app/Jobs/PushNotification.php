@@ -38,6 +38,8 @@ class PushNotification implements ShouldQueue
      */
     public function handle()
     {
+        error_log('#start PushNotification');
+
         $notificationLogs = $this->xmlInterface->ReadXml();
         foreach ($notificationLogs as $index => $notificationLog) {
             $this->push($notificationLog);
@@ -46,6 +48,8 @@ class PushNotification implements ShouldQueue
 
     private function push(NotificationLog $notificationLog)
     {
+        error_log('#start push');
+
         $areas = json_decode($notificationLog->areas);
         $conpany_users = $this->bcpUserService->getPushUser($areas);
  
@@ -57,6 +61,7 @@ class PushNotification implements ShouldQueue
                 $data["notifications"][] = ['loginName' => $setting->user_cd];
                 $data['data']['url'] = url("/bcp/info?company_cd={$settings[0]->company_cd}&user_cd={$setting->user_cd}&notification_log_id={$notificationLog->id}}");
                 $response = Http::post($settings[0]->api_url, $data);
+                error_log('#push post');
             }
         } 
     }

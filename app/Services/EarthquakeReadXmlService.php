@@ -20,9 +20,6 @@ class EarthquakeReadXmlService implements ReadXmlInterface
 
         $response = Http::get(BcpConsts::EARTHQUAKE_API_URL);
         $xml_obj = simplexml_load_string($response->body());
-        //dd($response->body());
-        error_log('#response body is');
-        error_log($response->body());
 
         $notificationLogs = [];
         foreach ($xml_obj->entry as $entry) {
@@ -57,9 +54,6 @@ class EarthquakeReadXmlService implements ReadXmlInterface
     private function ReadDetailXml($url)
     {
         $response = Http::get($url);
-        //  dd($response->body());
-        error_log('#response body(detail) is');
-        error_log($response->body());
 
         $xml_obj = simplexml_load_string($response->body());
         $result  = new stdClass;
