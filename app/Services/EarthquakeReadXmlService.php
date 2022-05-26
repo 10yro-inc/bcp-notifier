@@ -16,9 +16,14 @@ class EarthquakeReadXmlService implements ReadXmlInterface
 
     public function ReadXml()
     {
+        error_log('#start EarthquakeReadXmlService#ReadXml');
+
         $response = Http::get(BcpConsts::EARTHQUAKE_API_URL);
         $xml_obj = simplexml_load_string($response->body());
         //dd($response->body());
+        error_log('#response body is');
+        error_log($response->body());
+
         $notificationLogs = [];
         foreach ($xml_obj->entry as $entry) {
             if (strpos($entry->id, BcpConsts::EARTHQUAKE_XML_CODE) === false) {
@@ -26,6 +31,7 @@ class EarthquakeReadXmlService implements ReadXmlInterface
             }
 
             $detail = $this->ReadDetailXml($entry->link['href']);
+            error_log('#ReadDetailXml');
 
             $notificationLog = NotificationLog::where('api_id', '=', $detail->event_id)->first();
             if (!is_null($notificationLog)) {
@@ -42,6 +48,8 @@ class EarthquakeReadXmlService implements ReadXmlInterface
                 ]
             );
             $notificationLogs[] =  $notificationLog;
+
+            error_log('#create NotificationLog');
         }
         return $notificationLogs;
     }
@@ -50,6 +58,9 @@ class EarthquakeReadXmlService implements ReadXmlInterface
     {
         $response = Http::get($url);
         //  dd($response->body());
+        error_log('#response body(detail) is');
+        error_log($response->body());
+
         $xml_obj = simplexml_load_string($response->body());
         $result  = new stdClass;
         $event_id = (string)$xml_obj->Head->EventID[0];

@@ -21,6 +21,8 @@ class InfoPageController extends Controller
     //
     public function index(Request $request)
     {
+        error_log('#start InfoPageController');
+
         $companies = $this->companyService->getCompany($request->company_cd);
 
         if (count($companies) !== 1) {
@@ -30,10 +32,13 @@ class InfoPageController extends Controller
         try {
             $infoPageAccess =  $this->infoPageAccessService->save($request);
         } catch (\Exception $e) {
+            error_log('error {$e}');
         }
 
         // info page url
         $info_page_url = $companies[0]->CompanySetting->info_page_url;
+
+        error_log('#redirect');
 
         return redirect($info_page_url); 
     }

@@ -11,6 +11,8 @@ class PushNotificationRegisterController extends Controller
 
     public function index(){
 
+        error_log('#start PushNotificationRegisterController');
+
         PushNotification::dispatch(new EarthquakeReadXmlService());
     }
 }
