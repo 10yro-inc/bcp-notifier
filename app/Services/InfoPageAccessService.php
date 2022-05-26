@@ -19,8 +19,6 @@ class InfoPageAccessService
     public function save($params)
     {
         try {
-            error_log('#start InfoPageAccessService#save');
-
             DB::beginTransaction();
 
             $infoPageAccess = InfoPageAccess::create([
@@ -30,8 +28,6 @@ class InfoPageAccessService
             ]);
 
             DB::commit();
-
-            error_log('#end InfoPageAccessService#save');
 
             return true;
         } catch (\Throwable $e) {
