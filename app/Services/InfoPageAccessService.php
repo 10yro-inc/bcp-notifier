@@ -6,6 +6,7 @@ use App\Models\BcpUser;
 use App\Models\BcpUserSetting;
 use App\Models\Company;
 use App\Consts\BcpConsts;
+use App\Models\InfoPageAccess;
 use Illuminate\Support\Facades\DB;
 
 /**
