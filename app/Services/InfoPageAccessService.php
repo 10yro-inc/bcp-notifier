@@ -16,7 +16,7 @@ class InfoPageAccessService
 {
 
     //
-    public function save($param)
+    public function save($params)
     {
         try {
             error_log('#start InfoPageAccessService#save');
