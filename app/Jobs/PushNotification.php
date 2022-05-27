@@ -59,7 +59,7 @@ class PushNotification implements ShouldQueue
             $data["message"] =  $settings[0]->push_notification;
             foreach ($settings  as $setting) {
                 $data["notifications"][] = ['loginName' => $setting->user_cd];
-                $data['data']['url'] = url("/bcp/info?company_cd={$settings[0]->company_cd}&user_cd={$setting->user_cd}&notification_log_id={$notificationLog->id}}");
+                $data['data']['url'] = url("/bcp/info?company_cd={$settings[0]->company_cd}&user_cd={$setting->user_cd}&notification_log_id={$notificationLog->id}");
                 $response = Http::post($settings[0]->api_url, $data);
                 error_log('#push post');
             }
