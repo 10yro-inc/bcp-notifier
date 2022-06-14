@@ -46,7 +46,7 @@
 
             <!-- タイトル -->
             <div class="navbar-brand navbar-brand-center">
-                <strong class="ng-binding">会社BCP設定一覧</strong>
+                <strong class="ng-binding">@yield('title')</strong>
             </div>
 
             <!-- 戻る

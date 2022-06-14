@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Consts\BcpConsts;
 use App\Models\InfoPageAccess;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 /**
  * 
@@ -21,19 +22,25 @@ class InfoPageAccessService
         try {
             DB::beginTransaction();
 
-            $infoPageAccess = InfoPageAccess::create([
-                'user_cd'   => $params->user_cd,
-                'company_cd'    => $params->company_cd,
-                'notification_log_id'   => $params->notification_log_id,
+            InfoPageAccess::create([
+                'bcp_user_id' => $params['bcp_user_id'],
+                'company_id' => $params['company_id'],
+                'notification_log_id' => $params['notification_log_id'],
+                'accessed_at' => Carbon::now()
             ]);
 
             DB::commit();
-
+            
             return true;
         } catch (\Throwable $e) {
             DB::rollBack();
-            error_log($e);
+            echo($e);
             return false;
         }
+    }
+
+    public function search($condition)
+    {
+        return InfoPageAccess::where('company_id', '=', $condition->company_id)->orderBy('accessed_at', 'desc')->get();
     }
 }

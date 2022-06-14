@@ -115,7 +115,14 @@ var userListClick = function () {
     }
 
     get("/bcp/user", params);
-   
+}
 
+var accessesClick = function () {
+    var selectedRow = document.querySelector('.row-selected');
+    showSpinner()
+    var params = {
+        company_id: selectedRow.dataset.company_id
+    }
 
+    get("/bcp/access", params);
 }

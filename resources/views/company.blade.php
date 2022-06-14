@@ -2,13 +2,12 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/company.css') }}">
 @endsection
+@section('title')
+    会社一覧
+@endsection
 @section('content')
     <div class="app-content">
         <div class="row table-count">
-            <div class="col-xs-6 wrap_btn" ui-shared-state="">
-                <button type="button" onclick="openFilterDialog()" class="btn btnOutlinePrimary"
-                    ui-turn-on="modalRefine">ユーザー設定</button>
-            </div>
             <div class="text-right resultStats ng-binding">
                 {{ count($list) }}件
             </div>
@@ -42,7 +41,6 @@
                             <td id="api_url">{{ $company->api_url }}</td>
                             <td id="push_notification">{{ $company->push_notification }}</td>
                             <td id="info_page_url">{{ $company->info_page_url }}</td>
-
                         </tr>
                     @endforeach
                 </tbody>
@@ -55,6 +53,7 @@
                 <button type="button" onclick="openModDialog()" class="btn btn-primary large">変更</button>
                 <button type="button" onclick="deleteClick()" class="btn btn-primary large">削除</button>
                 <button type="button" onclick="userListClick()" class="btn btn-primary large">ユーザー一覧</button>
+                <button type="button" onclick="accessesClick()" class="btn btn-primary large">アクセス履歴</button>
             </div>
         </div>
 

@@ -10,8 +10,24 @@ class InfoPageAccess extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_cd',
-        'company_cd',
-        'notification_log_id'
+        'bcp_user_id',
+        'company_id',
+        'notification_log_id',
+        'accessed_at',
     ];
+
+    public function bcpUser()
+    {
+        return $this->hasOne(BcpUser::class, 'id', 'bcp_user_id');
+    }
+
+    public function company()
+    {
+        return $this->hasOne(Company::class, 'id', 'company_id');
+    }
+
+    public function notificationLog()
+    {
+        return $this->hasOne(NotificationLog::class, 'id', 'notification_log_id');
+    }
 }

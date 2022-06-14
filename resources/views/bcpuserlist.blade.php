@@ -2,6 +2,9 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/company.css') }}">
 @endsection
+@section('title')
+    BCPユーザー一覧
+@endsection
 @section('content')
     <div class="app-content">
         <div class="row table-count">

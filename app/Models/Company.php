@@ -22,4 +22,9 @@ class Company extends Model
     {
         return $this->hasOne(CompanySetting::class, 'company_id','id');
     } 
+
+    public function bcpUsers()
+    {
+        return $this->hasMany(BcpUser::class, 'company_id','id');
+    }
 }
