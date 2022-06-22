@@ -13,6 +13,7 @@ use App\Models\NotificationLog;
 use App\Consts\BcpConsts;
 use App\Services\BcpUserService;
 use App\Library\Interface\ReadXmlInterface;
+use App\Models\NotificationExecutionLogs;
 
 class PushNotification implements ShouldQueue
 {
@@ -60,7 +61,15 @@ class PushNotification implements ShouldQueue
             foreach ($settings  as $setting) {
                 $data["notifications"][] = ['loginName' => $setting->user_cd];
                 $data['data']['url'] = url("/bcp/info?company_cd={$settings[0]->company_cd}&user_cd={$setting->user_cd}&notification_log_id={$notificationLog->id}");
-                $response = Http::post($settings[0]->api_url, $data);
+                // PUSH通知 API呼び出し
+                Http::post($settings[0]->api_url, $data);
+                // PUSH通知実行ログ登録
+                NotificationExecutionLogs::create(
+                    [
+                        'notification_log_id' => $notificationLog->id,
+                        'bcp_user_id' => $setting->id,
+                    ]
+                );
                 error_log('#push post');
             }
         } 

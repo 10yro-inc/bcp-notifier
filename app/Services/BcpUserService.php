@@ -82,7 +82,9 @@ class BcpUserService
     ,'company_settings.push_notification'
     ,'company_settings.cooperation_password'
     ,'company_settings.info_page_url'
-    ,'bcp_users.user_cd']);
+    ,'bcp_users.user_cd'
+    ,'bcp_users.id']);
+
     $rows = $query->get();
     $company_users = [];
     foreach ($rows as $row) {
