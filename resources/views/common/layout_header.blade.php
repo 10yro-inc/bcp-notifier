@@ -98,9 +98,11 @@
         </div>
     </div>
     @yield('dialog')
+    <script src="{{ asset('js/common.js') }}"></script>
     <script src="{{ asset('js/spinner.js') }}"></script>
     <script src="{{ asset('js/dialog.js') }}"></script>
     <script src="{{ asset('js/request.js') }}"></script>
+
     <input type=hidden id="csrf_token" value="{{ csrf_token() }}">
     @yield('javascript')
 </body>

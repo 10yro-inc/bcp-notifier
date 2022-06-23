@@ -67,8 +67,10 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/common.js') }}"></script>
     <script src="{{ asset('js/spinner.js') }}"></script>
     <script src="{{ asset('js/dialog.js') }}"></script>
+
     @yield('javascript')
 </body>
 
