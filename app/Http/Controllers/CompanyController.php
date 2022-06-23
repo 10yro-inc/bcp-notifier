@@ -19,7 +19,7 @@ class CompanyController extends Controller
     {
         $user = session()->get('user');
 
-        $list = $this->companyService->getComanies($user->company_group_id, $user->is_super);
+        $list = $this->companyService->getComanies($user->id, $user->company_group_id, $user->is_super);
 
         $companyGroupList = $this->companyService->getComanyGroups();
 

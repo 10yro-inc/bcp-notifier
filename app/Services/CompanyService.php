@@ -17,7 +17,7 @@ use function PHPUnit\Framework\isNull;
 class CompanyService
 {
     // 会社設定一覧取得
-    public function getComanies($companyGroupid, $isAll = false)
+    public function getComanies($userId, $companyGroupid, $isAll = false)
     {
 
         $query = DB::table('companies')
@@ -26,7 +26,8 @@ class CompanyService
 
         if (!$isAll) {
             $query->join('users', 'companies.company_group_id', '=', 'users.company_group_id')
-                ->where('companies.company_group_id', '=', $companyGroupid);
+                ->where('companies.company_group_id', '=', $companyGroupid)
+                ->where('users.id', '=', $userId);
         }
         $query->select([
             'company_settings.id as company_settings_id',
@@ -42,8 +43,6 @@ class CompanyService
         ])
             ->orderBy('company_group_name')
             ->orderBy('company_name');
-        //dd($query->toSql(), $query->getBindings());
-        // $companies = $query->get();
         
         return $query->get();
     }
