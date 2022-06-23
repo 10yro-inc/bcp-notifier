@@ -21,8 +21,19 @@ class CompanyController extends Controller
 
         $list = $this->companyService->getComanies($user->id, $user->company_group_id, $user->is_super);
 
-        $companyGroupList = $this->companyService->getComanyGroups();
-
+        $tempCompanyGroupList = $this->companyService->getComanyGroups();
+        $companyGroupList = [];
+        if($user->is_super){
+            $companyGroupList = $tempCompanyGroupList;
+        }else{
+            foreach ($tempCompanyGroupList as $key => $value) {
+                if($value->id == $user->company_group_id){
+                    $companyGroupList[] = $value;
+                }
+               
+            }
+            
+        }
         return view('company', ['list' => $list, 'companyGroupList' => $companyGroupList, 'is_super' => $user->is_super]);
     }
 

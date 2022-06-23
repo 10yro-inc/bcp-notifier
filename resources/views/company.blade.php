@@ -76,10 +76,10 @@
                             </div>
                             <div class="col-xs-10">
                                 <select id="company_group_id" class="form-control" {{ $is_super ? '' : 'disabled' }}>
-                                    <option value=""></option>
                                     @foreach ($companyGroupList as $index => $companyGroup)
                                         <option value="{{ $companyGroup->id }}">{{ $companyGroup->name }}</option>
                                     @endforeach
+
                                 </select>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                                 <input type="text" id="push_notification" class="form-control">
                             </div>
                         </div>
-                         <div class="row">
+                        <div class="row">
                             <div class="col-xs-2">
                                 <label class="control-label">お知らせページURL</label>
                             </div>
