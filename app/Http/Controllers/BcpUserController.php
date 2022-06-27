@@ -48,7 +48,7 @@ class BcpUserController extends Controller
                 $result['aes_error'] = true;
             }
 
-            $bcpUser =  $this->bcpUserService->getUser($user_cd);
+            $bcpUser =  $this->bcpUserService->getUser($user_cd,$company_cd);
             if (!is_null($bcpUser)) {
                 $bcpUserSetting = $bcpUser->BcpUserSetting;
                 if (!is_null($bcpUserSetting)) {

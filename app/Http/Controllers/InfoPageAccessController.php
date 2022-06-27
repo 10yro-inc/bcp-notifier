@@ -31,7 +31,7 @@ class InfoPageAccessController extends Controller
             return;
         }
 
-        $bcpUser = $this->bcpUserService->getUser($request->user_cd);
+        $bcpUser = $this->bcpUserService->getUser($request->user_cd,$request->company_cd);
         if ($bcpUser) {
             // userが取得できたらアクセスログを登録する
             try {

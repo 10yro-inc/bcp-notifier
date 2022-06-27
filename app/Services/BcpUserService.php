@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\DB;
 class BcpUserService
 {
   // ユーザー取得
-  public function getUser($user_cd)
+  public function getUser($user_cd, $company_cd)
   {
-    return BcpUser::where('user_cd', $user_cd)->first();
+
+    $company = Company::where('company_cd', $company_cd)->first();
+    if (is_null($company)) {
+      return null;
+    }
+    return BcpUser::where('user_cd', $user_cd)
+      ->where('company_id', $company->id)
+      ->first();
   }
 
   public function saveUser($param)
@@ -24,9 +31,9 @@ class BcpUserService
 
     try {
       DB::beginTransaction();
-      $user = $this->getUser($param->user_cd);
+      $user = $this->getUser($param->user_cd, $param->company_cd);
       $company = Company::where('company_cd', '=', $param->company_cd)->first();
-
+ 
       if (is_null($user)) {
         $user = BcpUser::create(['user_cd' => $param->user_cd, 'company_id' => $company->id]);
       }
@@ -62,7 +69,7 @@ class BcpUserService
         $intMaxs[BcpConsts::EARTHQUAKE_INT3][] = $area->pref_code;
       }
     }
-  
+
     $query = DB::table('bcp_users')
       ->join('bcp_user_settings', 'bcp_users.id', '=', 'bcp_user_settings.bcp_user_id')
       ->join('companies', 'bcp_users.company_id', '=', 'companies.id')
@@ -71,19 +78,15 @@ class BcpUserService
     foreach ($intMaxs  as $intMax => $prefs) {
       for ($i = 1; $i <= 5; $i++) {
         $query->orWhere(function (\Illuminate\Database\Query\Builder $query) use ($intMax, $prefs, $i) {
-         array_push($prefs,0);
+          array_push($prefs, 0);
           $query->where('earthquake_cd', '=', $intMax)
-            ->WhereIn('pref' . (string)$i,$prefs);
+            ->WhereIn('pref' . (string)$i, $prefs);
         });
       }
     }
-    $query->select(['company_settings.api_url'
-    ,'companies.company_cd'
-    ,'company_settings.push_notification'
-    ,'company_settings.cooperation_password'
-    ,'company_settings.info_page_url'
-    ,'bcp_users.user_cd'
-    ,'bcp_users.id']);
+    $query->select([
+      'company_settings.api_url', 'companies.company_cd', 'company_settings.push_notification', 'company_settings.cooperation_password', 'company_settings.info_page_url', 'bcp_users.user_cd', 'bcp_users.id'
+    ]);
 
     $rows = $query->get();
     $company_users = [];
