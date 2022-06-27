@@ -48,7 +48,6 @@ use App\Consts\BcpConsts;
                     </div>
                     <div class="col-xs-10">
                         <select class="form-control" name="earthquake">
-                            <option class="" value="string:0"></option>
                             @foreach (BcpConsts::EarthquakeList as $no => $value)
                                 @if (isset($earthquake) && $earthquake == $no)
                                     <option value="{{ $no }}" selected>{{ $value }}</option>
