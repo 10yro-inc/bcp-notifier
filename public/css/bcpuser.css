@@ -54,3 +54,9 @@ h1 {
 select.form-control {
     background-color: #ffffff;
 }
+
+.flexleft{
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 20px;
+}

@@ -49,13 +49,13 @@
                 <strong class="ng-binding">@yield('title')</strong>
             </div>
 
-            <!-- 戻る
+             @if(Request::is('company'))
                 <div id="headerBackLink" class="btn-group pull-left">
                     <div class="btn">
-                        <a><img src="./img/arrow_left.svg"> 戻る</a>
+                        <a target="new" href="{{ asset('files/BCP通知管理システムマニュアル_v1.pdf')}}" > 操作マニュアル</a>
                     </div>
                 </div>
- -->
+            @endif  
             <!-- ログアウト -->
             <div class="btn-group pull-right">
                 <div class="btn">

@@ -13,7 +13,9 @@ use App\Consts\BcpConsts;
         </div>
     @endsection
 @else
+
     @section('content')
+      <div class="flexleft"><a target="new" href="{{ asset('files/BCP通知管理ユーザーマニュアル_v1.pdf')}}" > 操作マニュアル</a></div>
         @if (session('message'))
             <span style="display:none" id="message">{{ session('message') }} </span>
         @endif

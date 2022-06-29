@@ -7,7 +7,7 @@
         @if (session('err_message'))
             <span style="display:none" id="err_message">{{ session('err_message')  }}  </span>
         @endif
-  
+  <div><a target="new" href="{{ asset('files/BCP通知サービス利用規約_v1.pdf')}}" class="flexleft">利用規約</a></div>
     <div class="app-content flexCenter">
         <div>
             <h1 class="text-center">BCP通知管理システム</h1>
@@ -25,6 +25,7 @@
             </form>
         </div>
     </div>
+    
 @endsection
 
 @section('javascript')
