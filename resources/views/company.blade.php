@@ -51,7 +51,7 @@
             <div class="col-xs-12  text-center wrap_btn">
                 <button type="button" onclick="openAddDialog()" class="btn btn-primary large">新規作成</button>
                 <button type="button" onclick="openModDialog()" class="btn btn-primary large">変更</button>
-                <button type="button" onclick="deleteClick()" class="btn btn-primary large">削除</button>
+                <button type="button" onclick="openDeleteDialog()" class="btn btn-primary large">削除</button>
                 <button type="button" onclick="userListClick()" class="btn btn-primary large">ユーザー一覧</button>
                 <button type="button" onclick="accessesClick()" class="btn btn-primary large">アクセス履歴</button>
             </div>
@@ -216,6 +216,28 @@
                     </div>
                     <div class="modal-footer text-center">
                         <button onclick="modRegistClick()" class="btn btn-primary">更新</button>
+                        <button onclick="cancelClick()" class="btn btn-default">キャンセル</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div ui-yield-to="modals" id="deleteDialog">
+        <div id="modalRefine" class="modal hasJudeg ng-scope" ui-if="modalRefine" ui-state="modalRefine">
+            <div class="modal-backdrop in"></div>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">削除</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="delete_message">削除しますが、よろしいですか？</div>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <button onclick="deleteClick()" class="btn btn-primary">OK</button>
                         <button onclick="cancelClick()" class="btn btn-default">キャンセル</button>
                     </div>
                 </div>

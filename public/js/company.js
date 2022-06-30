@@ -17,6 +17,18 @@ var openAddDialog = function () {
     }
 }
 
+var openDeleteDialog = function () {
+
+    var dailog = document.querySelector('#deleteDialog');
+    var selectedRow = document.querySelector('.row-selected');
+
+    if (dailog) {
+        dailog.querySelector('#delete_message').innerHTML = "会社名:" + selectedRow.querySelector('#company_name').innerHTML + "　を削除します。よろしいですか？";
+     
+        dailog.style.visibility = "visible";
+
+    }
+}
 
 var openModDialog = function () {
 
@@ -46,6 +58,7 @@ var cancelClick = function () {
 
     document.querySelector('#addDialog').style.visibility = "hidden";;
     document.querySelector('#modDialog').style.visibility = "hidden";;
+    document.querySelector('#deleteDialog').style.visibility = "hidden";;
 }
 
 var addRegistClick = function () {

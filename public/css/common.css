@@ -750,6 +750,11 @@ ul.num li{
 	visibility: hidden;
 }
 
+#deleteDialog {
+	visibility: hidden;
+}
+
+
 #modDialog {
 	visibility: hidden;
 }
