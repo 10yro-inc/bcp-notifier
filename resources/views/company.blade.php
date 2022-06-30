@@ -234,7 +234,7 @@
                         <h4 class="modal-title">削除</h4>
                     </div>
                     <div class="modal-body">
-                        <div id="delete_message">削除しますが、よろしいですか？</div>
+                        <div id="delete_message" class="text-center">削除しますが、よろしいですか？</div>
                     </div>
                     <div class="modal-footer text-center">
                         <button onclick="deleteClick()" class="btn btn-primary">OK</button>
