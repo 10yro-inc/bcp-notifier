@@ -24,6 +24,14 @@ use App\Consts\BcpConsts;
             <form method="post" action="/bcp/setting" id="bcp_form">
                 @csrf
                 <h1 class="flexCenter">通知設定</h1>
+                               <div class="row">
+                    <div class="col-xs-2">
+                        <label class="control-label">会社名</label>
+                    </div>
+                    <div class="col-xs-10">
+                        <label>{{ $company_name }}</label>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xs-2">
                         <label class="control-label">会社コード</label>

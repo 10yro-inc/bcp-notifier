@@ -46,7 +46,10 @@ class BcpUserController extends Controller
 
             if (count($companies) !== 1) {
                 $result['aes_error'] = true;
+                return  view('bcpuser', $result);
             }
+
+            $company_name = $companies[0]->name;
 
             $bcpUser =  $this->bcpUserService->getUser($user_cd,$company_cd);
             if (!is_null($bcpUser)) {
@@ -67,6 +70,7 @@ class BcpUserController extends Controller
 
             $result['param'] = $request->param;
             $result['company_cd'] = $company_cd;
+            $result['company_name'] = $company_name;
             $result['user_cd'] = $user_cd;
         } catch (\Exception $e) {
             $result['aes_error'] = true;
