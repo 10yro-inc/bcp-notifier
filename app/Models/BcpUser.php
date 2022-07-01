@@ -24,6 +24,11 @@ class BcpUser  extends Model
     Public function BcpUserSetting()
     {
         return $this->hasOne(BcpUserSetting::class, 'bcp_user_id','id');
+    }
+
+    Public function BcpUserCompany()
+    {
+        return $this->hasOne(Company::class, 'id','company_id');
     } 
 
   

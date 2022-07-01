@@ -123,7 +123,7 @@ class BcpUserController extends Controller
             // 文字コードをShift-JISに変換
             stream_filter_prepend($stream, 'convert.iconv.utf-8/cp932//TRANSLIT');
             // データ
-            $users = $this->bcpUserService->getUserExportList($request->company_id);
+            $users = $this->bcpUserService->getUserExportList($request->company_id,session()->get('user')->is_super);
             fputcsv($stream, [
                 'ユーザー名',
                 '通知震度',
@@ -132,18 +132,20 @@ class BcpUserController extends Controller
                 '通知都道府県3',
                 '通知都道府県4',
                 '通知都道府県5',
+                '最終アクセス時間',
             ]);
-            foreach ($users->cursor() as $user) {
-                $setting = $user->BcpUserSetting;
+            foreach ($users as $user) {
+          
 
                 fputcsv($stream, [
                     $user->user_cd,
-                    array_key_exists($setting->earthquake_cd, BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$setting->earthquake_cd] : "",
-                    array_key_exists($setting->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref1] : "",
-                    array_key_exists($setting->pref2, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref2] : "",
-                    array_key_exists($setting->pref3, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref3] : "",
-                    array_key_exists($setting->pref4, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref4] : "",
-                    array_key_exists($setting->pref5, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref5] : "",
+                    array_key_exists($user->earthquake_cd, BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$user->earthquake_cd] : "",
+                    array_key_exists($user->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref1] : "",
+                    array_key_exists($user->pref2, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref2] : "",
+                    array_key_exists($user->pref3, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref3] : "",
+                    array_key_exists($user->pref4, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref4] : "",
+                    array_key_exists($user->pref5, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref5] : "",
+                    $user->accessed_at,
                 ]);
             }
             fclose($stream);
@@ -166,23 +168,20 @@ class BcpUserController extends Controller
     {
 
         $list = [];
-        $users = $this->bcpUserService->getUserExportList($request->company_id);
-        $company = $this->companyService->getCompanyById($request->company_id);
+        $users = $this->bcpUserService->getUserExportList($request->company_id,session()->get('user')->is_super);
 
-
-        foreach ($users->cursor() as $user) {
-            $setting = $user->BcpUserSetting;
-
+        foreach ($users as $user) {
             $list[] = (object) [
-                'earthquake' => array_key_exists($setting->earthquake_cd, BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$setting->earthquake_cd] : "",
+                'earthquake' => array_key_exists($user->earthquake_cd, BcpConsts::EarthquakeList) ? BcpConsts::EarthquakeList[$user->earthquake_cd] : "",
                 'user_cd' => $user->user_cd,
-                'company_cd' => $company->company_cd,
-                'pref1' =>  array_key_exists($setting->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref1] : "",
-                'pref1' =>  array_key_exists($setting->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref1] : "",
-                'pref2' =>  array_key_exists($setting->pref2, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref2] : "",
-                'pref3' =>  array_key_exists($setting->pref3, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref3] : "",
-                'pref4' =>  array_key_exists($setting->pref4, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref4] : "",
-                'pref5' => array_key_exists($setting->pref5, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$setting->pref5] : "",
+                'company_cd' => $user->company_cd,
+                'pref1' =>  array_key_exists($user->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref1] : "",
+                'pref1' =>  array_key_exists($user->pref1, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref1] : "",
+                'pref2' =>  array_key_exists($user->pref2, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref2] : "",
+                'pref3' =>  array_key_exists($user->pref3, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref3] : "",
+                'pref4' =>  array_key_exists($user->pref4, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref4] : "",
+                'pref5' => array_key_exists($user->pref5, BcpConsts::PrefecturesList) ? BcpConsts::PrefecturesList[$user->pref5] : "",
+                'accessed_at' => $user->accessed_at,
             ];
         }
 

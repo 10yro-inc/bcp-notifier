@@ -44,7 +44,7 @@
                             <td>{{ $bcpuser->pref3 }}</td>
                             <td>{{ $bcpuser->pref4 }}</td>
                             <td>{{ $bcpuser->pref5 }}</td>
-                            <td></td>
+                            <td>{{ $bcpuser->accessed_at }}</td>
 
                         </tr>
                     @endforeach

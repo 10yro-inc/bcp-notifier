@@ -6,6 +6,7 @@ use App\Models\BcpUser;
 use App\Models\BcpUserSetting;
 use App\Models\Company;
 use App\Consts\BcpConsts;
+use App\Models\InfoPageAccess;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -51,9 +52,24 @@ class BcpUserService
     }
   }
 
-  public function getUserExportList($company_id)
+  public function getUserExportList($company_id, $is_all = false)
   {
-    return BcpUser::where('company_id', $company_id);
+    $infoPageAccess = InfoPageAccess::groupBy('bcp_user_id')->selectRaw('MAX(accessed_at) As accessed_at, bcp_user_id');
+    if (!$is_all) {
+      $infoPageAccess->where('company_id', $company_id);
+    }
+
+    $query = DB::table('bcp_users')
+    ->join('bcp_user_settings', 'bcp_users.id', '=', 'bcp_user_settings.bcp_user_id')
+    ->join('companies', 'bcp_users.company_id', '=', 'companies.id')
+    ->join(DB::raw('(' . $infoPageAccess->toSql() . ') AS InfoPageAccess'), 'bcp_users.id', '=', 'InfoPageAccess.bcp_user_id');
+   
+    if (!$is_all) {
+      $query->setBindings([':company_id' => $company_id]);
+      $query->where('company_id', $company_id);
+    }
+  // dd($query->get());
+    return  $query->get();
   }
 
   public function getPushUser($areas)
