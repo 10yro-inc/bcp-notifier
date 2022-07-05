@@ -12,7 +12,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="robots" content="noindex , nofollow">
+<meta name="robots" content="noindex,nofollow">
 <!-- 電話番号リンク無効 -->
 <meta name="format-detection" content="telephone=no">
 
@@ -53,7 +53,7 @@
              @if(Request::is('company'))
                 <div id="headerBackLink" class="btn-group pull-left">
                     <div class="btn">
-                        <a target="new" href="{{ asset('files/BCP通知管理システムマニュアル_v1.pdf')}}" > 操作マニュアル</a>
+                        <a target="new" href="{{ asset('files/BCP通知サービスマニュアル_v1.pdf')}}" > 操作マニュアル</a>
                     </div>
                 </div>
             @endif  
