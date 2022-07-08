@@ -55,10 +55,12 @@ class PushNotification implements ShouldQueue
         $conpany_users = $this->bcpUserService->getPushUser($areas);
  
         foreach ($conpany_users as $company_cd => $settings) {
+            $data = [];
             $data['tenantCode'] =  $settings[0]->company_cd;
             $data['cooperationPassword'] = $settings[0]->cooperation_password;
             $data["message"] =  $settings[0]->push_notification;
             foreach ($settings  as $setting) {
+                $data["notifications"] = [];
                 $data["notifications"][] = ['loginName' => $setting->user_cd];
                 $data['data']['url'] = url("/bcp/info?company_cd={$settings[0]->company_cd}&user_cd={$setting->user_cd}&notification_log_id={$notificationLog->id}");
                 // PUSH通知 API呼び出し
@@ -72,6 +74,8 @@ class PushNotification implements ShouldQueue
                 );
                 error_log('#push post');
             }
+
+
         } 
     }
 }
